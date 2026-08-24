@@ -1,4 +1,5 @@
 using System;
+using Unity.Cinemachine;
 using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -15,8 +16,8 @@ public class PlayerMovement : NetworkBehaviour
         base.OnNetworkSpawn();
         
         //Disable the input if I am not the owner
-        if (!IsOwner)
-            GetComponent<PlayerInput>().enabled = false;
+        if (!IsOwner) return;
+        GetComponent<PlayerInput>().enabled = true;
     }
 
     private void LateUpdate()
@@ -44,7 +45,7 @@ public class PlayerMovement : NetworkBehaviour
 
     public void OnInteract()
     {
-        InteractionManager.Instance.Interact();
+        InteractionManager.Instance.Interact(this);
     }
     
     //RPCs to interact with the server

@@ -8,6 +8,7 @@ public class MainMenu : MonoBehaviour
 {
     [SerializeField] private Button startHostButton;
     [SerializeField] private Button startClientButton;
+    [SerializeField] private NetworkObject projectManagerPrefab;
 
     // Start is called before the first frame update
     void Start()
@@ -26,6 +27,7 @@ public class MainMenu : MonoBehaviour
     {
         NetworkManager.Singleton.StartHost();
         NetworkManager.Singleton.SceneManager.LoadScene("Main Game", LoadSceneMode.Single);
+        NetworkManager.Singleton.SpawnManager.InstantiateAndSpawn(projectManagerPrefab);
         DeactivateButtons();
     }
 

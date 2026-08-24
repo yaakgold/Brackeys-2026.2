@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class InteractionManager : MonoBehaviour
 {
@@ -24,6 +25,8 @@ public class InteractionManager : MonoBehaviour
     
     [SerializeField] private Interactable currentInteractable;
 
+    private PlayerMovement player;
+
     public void SetCurrentInteractable(Interactable interactable)
     {
         currentInteractable = interactable;
@@ -34,9 +37,19 @@ public class InteractionManager : MonoBehaviour
         currentInteractable = null;
     }
 
-    public void Interact()
+    public void Interact(PlayerMovement p)
     {
-        if (currentInteractable != null)
-            currentInteractable.Interact();
+        player = p;
+        
+        if (currentInteractable == null) return;
+        
+        player.GetComponent<PlayerInput>().enabled = false;
+        currentInteractable.Interact();
+    }
+
+    public void FinishInteraction()
+    {
+        if (currentInteractable == null) return;
+        player.GetComponent<PlayerInput>().enabled = true;
     }
 }

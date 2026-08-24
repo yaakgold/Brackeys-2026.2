@@ -1105,6 +1105,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::MainMenu
   startHostButton: {fileID: 2483525090330278506}
   startClientButton: {fileID: 1483409713763771002}
+  projectManagerPrefab: {fileID: 5350133917748305835, guid: ddce28286c30044778172f782a513c69, type: 3}
 --- !u!1 &8807202379522054101
 GameObject:
   m_ObjectHideFlags: 0
