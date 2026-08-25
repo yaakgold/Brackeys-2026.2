@@ -15,7 +15,7 @@
             </ui:VisualElement>
             <ui:VisualElement name="mainMenu" class="blocks-menu blocks-modal" style="flex-grow: 1; visibility: visible; overflow: visible; opacity: 1; height: auto; display: flex;">
                 <ui:Label text="Name of the game!" class="blocks-header blocks-header--space-bottom"/>
-                <ui:TextField label="Name:" placeholder-text="Enter your name..." class="blocks-textfield"/>
+                <ui:TextField label="Name:" placeholder-text="Enter your name..." name="playerName" class="blocks-textfield"/>
                 <ui:Button text="Find a Lobby" name="btnJoin" class="blocks-button"/>
             </ui:VisualElement>
             <ui:VisualElement name="join" style="flex-grow: 1; flex-direction: row; justify-content: center; align-self: auto; align-content: auto; align-items: center; display: none;">
