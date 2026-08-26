@@ -1,11 +1,13 @@
 using System;
+using System.Collections.Generic;
 using Unity.Cinemachine;
 using Unity.Netcode;
 using UnityEngine;
+using UnityEngine.Events;
+using Random = UnityEngine.Random;
 
 public class GameManager : NetworkBehaviour
 {
-    //TODO: Possibly make this a networked version of the singleton????
     #region Singleton
 
     public static GameManager Instance { get; private set; }
@@ -26,15 +28,42 @@ public class GameManager : NetworkBehaviour
     #endregion
 
     [SerializeField] private NetworkObject playerPrefab;
-    [SerializeField] private CinemachineCamera cam;
-    [SerializeField] private Transform target;
+    [SerializeField] private List<Color> playerColors;
     
-    private void Start()
+    private MpPlayerController _playerController;
+    
+    public MpPlayerController GetPlayerController() => _playerController;
+    
+    public override void OnNetworkSpawn()
     {
-        NetworkManager.Singleton.SpawnManager.InstantiateAndSpawn(playerPrefab, isPlayerObject: true);
+        if (Instance != this && Instance != null) return;
         
-        if (target == null)
-            target = NetworkManager.Singleton.SpawnManager.GetLocalPlayerObject().transform;
-        cam.Target.TrackingTarget = target;
+        base.OnNetworkSpawn();
+        
+        if (!NetworkManager.Singleton.IsHost && !NetworkManager.Singleton.IsServer) return;
+        
+        foreach (var id in NetworkManager.Singleton.ConnectedClientsIds)
+        {
+            var objs = NetworkManager.Singleton.SpawnManager.GetClientOwnedObjects(id);
+
+            foreach (var obj in objs)
+            {
+                if (!obj.TryGetComponent(out MpPlayerController player)) continue;
+                
+                _playerController = player;
+                _playerController.SetColorRpc(GetRandomColor());
+                break;
+            }
+            
+            NetworkManager.Singleton.SpawnManager.InstantiateAndSpawn(playerPrefab, id, isPlayerObject: true);
+        }
+    }
+
+    private Color GetRandomColor()
+    {
+        var colorIndex = Random.Range(0, playerColors.Count);
+        var color = playerColors[colorIndex];
+        playerColors.RemoveAt(colorIndex);
+        return color;
     }
 }

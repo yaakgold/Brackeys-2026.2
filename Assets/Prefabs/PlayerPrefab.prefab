@@ -125,6 +125,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerMovement
   ShowTopMostFoldoutHeaderGroup: 1
   moveSpeed: 5
+  gfx: {fileID: 9190351843172584025}
 --- !u!114 &4022203755960784996
 MonoBehaviour:
   m_ObjectHideFlags: 0

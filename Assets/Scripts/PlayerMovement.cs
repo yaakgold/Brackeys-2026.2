@@ -8,6 +8,7 @@ using UnityEngine.InputSystem;
 public class PlayerMovement : NetworkBehaviour
 {
     [SerializeField] private float moveSpeed = 5f;
+    [SerializeField] private GameObject gfx;
     
     private Vector2 _moveInput;
 
@@ -18,6 +19,13 @@ public class PlayerMovement : NetworkBehaviour
         //Disable the input if I am not the owner
         if (!IsOwner) return;
         GetComponent<PlayerInput>().enabled = true;
+        
+        if (Camera.main != null && Camera.main.TryGetComponent(out CameraHolder ch))
+        {
+            ch.SetCamera(transform);
+        }
+        
+        SetColorRpc(OwnerClientId);
     }
 
     private void LateUpdate()
@@ -54,6 +62,28 @@ public class PlayerMovement : NetworkBehaviour
     private void UpdateInputServerRpc(Vector2 move)
     {
         Move(move);
+    }
+
+    [Rpc(SendTo.Server)]
+    private void SetColorRpc(ulong id)
+    {
+        var color = GameManager.Instance.GetPlayerController().GetColor();
+        
+        if (gfx.TryGetComponent(out SpriteRenderer sr))
+        {
+            sr.color = color;
+        }
+        
+        SetColorRpc(color);
+    }
+
+    [Rpc(SendTo.ClientsAndHost)]
+    private void SetColorRpc(Color color)
+    {
+        if (gfx.TryGetComponent(out SpriteRenderer sr))
+        {
+            sr.color = color;
+        }
     }
 }
 

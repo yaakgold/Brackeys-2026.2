@@ -13,6 +13,7 @@ using WebSocketSharp;
 public class MainMenu : MonoBehaviour
 {
     [SerializeField] private NetworkObject projectManagerPrefab;
+    [SerializeField] private NetworkObject gameManagerPrefab;
     [SerializeField] private PanelRenderer panelRenderer;
     [SerializeField] private SessionSettings sessionSettings;
     
@@ -50,19 +51,16 @@ public class MainMenu : MonoBehaviour
         _session.RemovedFromSession += SessionOnRemovedFromSession;
         _session.PlayerJoined += SessionOnPlayerJoined;
         _session.PlayerLeaving += SessionOnPlayerLeaving;
-
-        if (_session.IsHost)
-        {
-            _root.Q("btnStart").style.display = DisplayStyle.Flex;
+        
+        if (!_session.IsHost) return;
+        _root.Q("btnStart").style.display = DisplayStyle.Flex;
             
-            //TODO: Remove this after testing
-            _root.Q("btnStart").enabledSelf = true;
-        }
+        //TODO: Remove this after testing
+        _root.Q("btnStart").enabledSelf = true;
     }
 
     private void SessionOnPlayerLeaving(string obj)
     {
-        print(_session.PlayerCount);
         if (_session.PlayerCount <= 2)
         {
             _root.Q("btnStart").enabledSelf = false;
@@ -89,7 +87,6 @@ public class MainMenu : MonoBehaviour
 
     private void SessionOnPlayerJoined(string obj)
     {
-        print(_session.PlayerCount);
         if (_session.PlayerCount >= 2)
         {
             _root.Q("btnStart").enabledSelf = true;
@@ -120,12 +117,6 @@ public class MainMenu : MonoBehaviour
         Application.Quit();
     }
 
-    private void OnReturn(ClickEvent evt)
-    {
-        _root.Q("mainMenu").style.display = DisplayStyle.Flex;
-        _root.Q("join").style.display = DisplayStyle.None;
-    }
-
     private void OnJoin(ClickEvent evt)
     {
         _root.Q("mainMenu").style.display = DisplayStyle.None;
@@ -136,5 +127,12 @@ public class MainMenu : MonoBehaviour
     {
         NetworkManager.Singleton.SceneManager.LoadScene("Main Game", LoadSceneMode.Single);
         NetworkManager.Singleton.SpawnManager.InstantiateAndSpawn(projectManagerPrefab);
+        NetworkManager.Singleton.SceneManager.OnLoadComplete += (id, sceneName, mode) =>
+        {
+            if (!NetworkManager.Singleton.IsHost && !NetworkManager.Singleton.IsServer) return;
+            
+            print("Running");
+            NetworkManager.Singleton.SpawnManager.InstantiateAndSpawn(gameManagerPrefab);
+        };
     }
 }
