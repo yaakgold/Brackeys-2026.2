@@ -54,6 +54,9 @@ public class MainMenu : MonoBehaviour
         if (_session.IsHost)
         {
             _root.Q("btnStart").style.display = DisplayStyle.Flex;
+            
+            //TODO: Remove this after testing
+            _root.Q("btnStart").enabledSelf = true;
         }
     }
 
