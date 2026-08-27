@@ -1,5 +1,6 @@
 using Unity.Netcode;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class ProjectManager : NetworkBehaviour
 {
@@ -85,5 +86,19 @@ public class ProjectManager : NetworkBehaviour
     private void EndOfDayRpc()
     {
         UIManager.Instance.OpenEndOfDayUI();
+    }
+
+    [Rpc(SendTo.Server)]
+    public void StartNextDayRpc()
+    {
+        UIManager.Instance.CloseEndOfDayUI();
+        
+        StartNextDayLocalRpc();
+    }
+
+    [Rpc(SendTo.ClientsAndHost)]
+    private void StartNextDayLocalRpc()
+    {
+        UIManager.Instance.CloseEndOfDayUI();
     }
 }

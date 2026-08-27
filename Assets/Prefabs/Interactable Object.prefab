@@ -174,7 +174,7 @@ CircleCollider2D:
   m_CompositeOperation: 0
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
-  m_Radius: 2.94
+  m_Radius: 2.38
 --- !u!114 &2366418318005760851
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -193,7 +193,7 @@ MonoBehaviour:
   Ownership: 1
   AlwaysReplicateAsRoot: 0
   SynchronizeTransform: 1
-  m_InScenePlaced: 1
+  m_InScenePlaced: 0
   ActiveSceneSynchronization: 0
   SceneMigrationSynchronization: 0
   SpawnWithObservers: 1
@@ -214,9 +214,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Interactable
   ShowTopMostFoldoutHeaderGroup: 1
-  interactionRange: 2.94
+  interactionRange: 2.38
   canvas: {fileID: 8989617933039974314}
   interactionText: {fileID: 6452439737564430568}
+  uiPanel: {fileID: 0}
   interactionName: Test
   tasks: []
 --- !u!1 &5420899675187442999

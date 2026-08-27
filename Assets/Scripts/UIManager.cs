@@ -1,5 +1,6 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
@@ -27,11 +28,21 @@ public class UIManager : MonoBehaviour
     [SerializeField] private TMP_Text dayText;
     [SerializeField] private TMP_Text hourText;
     [SerializeField] private Slider sanitySlider;
+    [SerializeField] private Button nextDayButton;
+
+    private PlayerMovement _player;
     
     public void OpenEndOfDayUI()
     {
         //TODO: Handle what to do if other players are in menus. I think I am going to force them out, like Among Us
+        _player.GetComponent<PlayerInput>().enabled = false;
         endOfDayUI.SetActive(true);
+    }
+
+    public void CloseEndOfDayUI()
+    {
+        endOfDayUI.SetActive(false);
+        _player.GetComponent<PlayerInput>().enabled = true;
     }
 
     public void SetDayText(int day)
@@ -44,8 +55,22 @@ public class UIManager : MonoBehaviour
         hourText.text = $"Hour: {hour}";
     }
 
+    /// <summary>
+    /// Set sanity
+    /// </summary>
+    /// <param name="sanity">New value / 100</param>
     public void SetSanity(int sanity)
     {
         sanitySlider.value = sanity;
+    }
+
+    public void OnNextDayButton()
+    {
+        ProjectManager.Instance.StartNextDayRpc();
+    }
+
+    public void SetPlayer(PlayerMovement playerMovement)
+    {
+        _player = playerMovement;
     }
 }

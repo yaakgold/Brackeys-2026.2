@@ -12,3 +12,9 @@ public enum ETaskType
     Sabotage,
     Other
 }
+
+public enum EPlayerRole
+{
+    Dev,
+    BadGuy
+}

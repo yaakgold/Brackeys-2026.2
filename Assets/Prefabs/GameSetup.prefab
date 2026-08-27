@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &1924775672105982213
+--- !u!1 &5981184114886602894
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,23 +8,23 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 5008381351174996381}
-  - component: {fileID: 220067016710806620}
-  - component: {fileID: 7665033775470946724}
+  - component: {fileID: 5742967904294659169}
+  - component: {fileID: 8921908125584941535}
+  - component: {fileID: 6321403704949216599}
   m_Layer: 0
-  m_Name: GameManager
+  m_Name: GameSetup
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &5008381351174996381
+--- !u!4 &5742967904294659169
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1924775672105982213}
+  m_GameObject: {fileID: 5981184114886602894}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
@@ -33,20 +33,20 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &220067016710806620
+--- !u!114 &8921908125584941535
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1924775672105982213}
+  m_GameObject: {fileID: 5981184114886602894}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Unity.Netcode.Runtime::Unity.Netcode.NetworkObject
-  GlobalObjectIdHash: 2313090930
-  InScenePlacedSourceGlobalObjectIdHash: 0
+  GlobalObjectIdHash: 1428906729
+  InScenePlacedSourceGlobalObjectIdHash: 1428906729
   DeferredDespawnTick: 0
   Ownership: 1
   AlwaysReplicateAsRoot: 0
@@ -59,22 +59,27 @@ MonoBehaviour:
   AutoObjectParentSync: 1
   SyncOwnerTransformWhenParented: 1
   AllowOwnerToParent: 0
---- !u!114 &7665033775470946724
+--- !u!114 &6321403704949216599
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1924775672105982213}
+  m_GameObject: {fileID: 5981184114886602894}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f54a8a521eaddbf49a816c6db7d7d4ba, type: 3}
+  m_Script: {fileID: 11500000, guid: 09286125710064f2cb53891f6d483960, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::GameManager
+  m_EditorClassIdentifier: Assembly-CSharp::GameSetup
   ShowTopMostFoldoutHeaderGroup: 1
-  playerPrefab: {fileID: -7812305575967934183, guid: aff3ded2f0550c97fa8a61fd85588ed9, type: 3}
-  tickSpeed: 2
-  sanityDecreaseAmount: 1
-  onTick:
-    m_PersistentCalls:
-      m_Calls: []
+  playerColors:
+  - {r: 0, g: 0, b: 0, a: 1}
+  - {r: 0.60226905, g: 0.60226905, b: 0.60226905, a: 1}
+  - {r: 0.6920408, g: 0.116767235, b: 0.116767235, a: 1}
+  - {r: 0.8018868, g: 0.7773045, b: 0.10969208, a: 1}
+  - {r: 0.21176432, g: 0.8, b: 0.109803915, a: 1}
+  - {r: 0.109803915, g: 0.30949104, b: 0.8, a: 1}
+  - {r: 0.4722425, g: 0.109803915, b: 0.8, a: 1}
+  - {r: 0.8, g: 0.109803915, b: 0.14618073, a: 1}
+  gameManagerPrefab: {fileID: 220067016710806620, guid: 7f731b9617c0d9d20b75785cdf1a0d1c, type: 3}
+  timeDelay: 10

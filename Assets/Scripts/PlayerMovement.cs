@@ -1,4 +1,5 @@
 using System;
+using DG.Tweening;
 using Unity.Cinemachine;
 using Unity.Netcode;
 using UnityEngine;
@@ -26,6 +27,14 @@ public class PlayerMovement : NetworkBehaviour
         }
         
         SetColorRpc(OwnerClientId);
+
+        UIManager.Instance.SetPlayer(this);
+
+        if (NetworkManager.Singleton.SpawnManager.GetLocalPlayerObject()
+            .TryGetComponent(out MpPlayerController player))
+        {
+            GameManager.Instance.onTick.AddListener(() => player.UpdateSanity(-GameManager.Instance.sanityDecreaseAmount));
+        }
     }
 
     private void LateUpdate()
@@ -41,7 +50,6 @@ public class PlayerMovement : NetworkBehaviour
 
     private void Move(Vector2 move)
     {
-        //TODO: Make this actually respect physics for walls and stuff
         transform.Translate(move * (Time.deltaTime * moveSpeed));
     }
     
@@ -65,10 +73,10 @@ public class PlayerMovement : NetworkBehaviour
     }
 
     [Rpc(SendTo.Server)]
-    private void SetColorRpc(ulong id)
+    private void SetColorRpc(ulong ownerId)
     {
-        var color = GameManager.Instance.GetPlayerController().GetColor();
-        
+        var color = GameSetup.Instance.GetPlayerController(ownerId).GetColor();
+
         if (gfx.TryGetComponent(out SpriteRenderer sr))
         {
             sr.color = color;

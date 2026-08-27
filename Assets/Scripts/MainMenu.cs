@@ -13,7 +13,7 @@ using WebSocketSharp;
 public class MainMenu : MonoBehaviour
 {
     [SerializeField] private NetworkObject projectManagerPrefab;
-    [SerializeField] private NetworkObject gameManagerPrefab;
+    [SerializeField] private NetworkObject gameSetupPrefab;
     [SerializeField] private PanelRenderer panelRenderer;
     [SerializeField] private SessionSettings sessionSettings;
     
@@ -125,14 +125,17 @@ public class MainMenu : MonoBehaviour
     
     void StartGame(ClickEvent evt)
     {
-        NetworkManager.Singleton.SceneManager.LoadScene("Main Game", LoadSceneMode.Single);
+        NetworkManager.Singleton.SceneManager.LoadScene("Game Setup", LoadSceneMode.Single);
         NetworkManager.Singleton.SpawnManager.InstantiateAndSpawn(projectManagerPrefab);
-        NetworkManager.Singleton.SceneManager.OnLoadComplete += (id, sceneName, mode) =>
-        {
-            if (!NetworkManager.Singleton.IsHost && !NetworkManager.Singleton.IsServer) return;
+        NetworkManager.Singleton.SceneManager.OnLoadComplete += SceneManagerOnOnLoadComplete;
+    }
+
+    private void SceneManagerOnOnLoadComplete(ulong clientId, string sceneName, LoadSceneMode loadSceneMode)
+    {
+        NetworkManager.Singleton.SceneManager.OnLoadComplete -= SceneManagerOnOnLoadComplete;
+        
+        if (!NetworkManager.Singleton.IsHost && !NetworkManager.Singleton.IsServer) return;
             
-            print("Running");
-            NetworkManager.Singleton.SpawnManager.InstantiateAndSpawn(gameManagerPrefab);
-        };
+        NetworkManager.Singleton.SpawnManager.InstantiateAndSpawn(gameSetupPrefab);
     }
 }

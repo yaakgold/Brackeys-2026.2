@@ -36,9 +36,9 @@ public class TaskUI : MonoBehaviour
         {
             case ETaskType.Sanity:
                 if (NetworkManager.Singleton.SpawnManager.GetLocalPlayerObject()
-                    .TryGetComponent(out SanityController sc))
+                    .TryGetComponent(out MpPlayerController player))
                 {
-                    sc.UpdateSanity(_task.effectAmount);
+                    player.UpdateSanity(-_task.effectAmount);
                 }
                 break;
             case ETaskType.Quality:

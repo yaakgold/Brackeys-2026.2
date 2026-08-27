@@ -546,7 +546,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MainMenu
   projectManagerPrefab: {fileID: 5350133917748305835, guid: ddce28286c30044778172f782a513c69, type: 3}
-  gameManagerPrefab: {fileID: 220067016710806620, guid: 7f731b9617c0d9d20b75785cdf1a0d1c, type: 3}
+  gameSetupPrefab: {fileID: 8921908125584941535, guid: a5aca31b3ac33ac5994faa78acdb2d0b, type: 3}
   panelRenderer: {fileID: 854523985}
   sessionSettings: {fileID: 11400000, guid: 0bf4e1684added44da254017c7fc41b2, type: 2}
 --- !u!1001 &1040031268
@@ -1333,7 +1333,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MainMenu
   projectManagerPrefab: {fileID: 5350133917748305835, guid: ddce28286c30044778172f782a513c69, type: 3}
-  gameManagerPrefab: {fileID: 0}
+  gameSetupPrefab: {fileID: 0}
   panelRenderer: {fileID: 0}
   sessionSettings: {fileID: 0}
 --- !u!1 &8807202379522054101
