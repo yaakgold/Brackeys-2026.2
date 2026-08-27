@@ -1,12 +1,7 @@
-using System;
 using System.Collections;
-using System.Collections.Generic;
-using Unity.Cinemachine;
 using Unity.Netcode;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
-using Random = UnityEngine.Random;
 
 public class GameManager : NetworkBehaviour
 {

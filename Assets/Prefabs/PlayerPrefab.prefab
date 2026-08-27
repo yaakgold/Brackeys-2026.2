@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 1907679752499063247}
   - component: {fileID: 8295650092836605059}
   - component: {fileID: 2557123587202118141}
+  - component: {fileID: 6925312918170220189}
   m_Layer: 0
   m_Name: PlayerPrefab
   m_TagString: Untagged
@@ -126,6 +127,7 @@ MonoBehaviour:
   ShowTopMostFoldoutHeaderGroup: 1
   moveSpeed: 5
   gfx: {fileID: 9190351843172584025}
+  anim: {fileID: 6925312918170220189}
 --- !u!114 &4022203755960784996
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -246,6 +248,28 @@ MonoBehaviour:
   UseRigidBodyForMotion: 0
   AutoUpdateKinematicState: 1
   AutoSetKinematicOnDespawn: 1
+--- !u!95 &6925312918170220189
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6150743228541812143}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 8eb56f75d4e642a0b9b16004f5461784, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &9190351843172584025
 GameObject:
   m_ObjectHideFlags: 0

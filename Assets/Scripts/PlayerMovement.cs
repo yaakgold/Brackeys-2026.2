@@ -8,8 +8,10 @@ using UnityEngine.InputSystem;
 [RequireComponent(typeof(PlayerInput))]
 public class PlayerMovement : NetworkBehaviour
 {
+    private static readonly int IsMoving = Animator.StringToHash("IsMoving");
     [SerializeField] private float moveSpeed = 5f;
     [SerializeField] private GameObject gfx;
+    [SerializeField] private Animator anim;
     
     private Vector2 _moveInput;
 
@@ -46,11 +48,16 @@ public class PlayerMovement : NetworkBehaviour
         {
             UpdateInputServerRpc(_moveInput);
         }
+        else
+        {
+            anim.SetBool(IsMoving, false);
+        }
     }
 
     private void Move(Vector2 move)
     {
         transform.Translate(move * (Time.deltaTime * moveSpeed));
+        anim.SetBool(IsMoving, true);
     }
     
     //Get inputs from the PlayerInput script
