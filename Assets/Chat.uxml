@@ -1,0 +1,15 @@
+<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/Scripts/Blocks/Common/Content/stylesheets/inputs.uss?fileID=7433441132597879392&amp;guid=e01aade3b4d44466be1a74cda2e4b773&amp;type=3#inputs"/>
+    <Style src="project://database/Assets/Scripts/Blocks/Common/Content/stylesheets/core.uss?fileID=7433441132597879392&amp;guid=579ba5ca033b24b4a963ed035c497332&amp;type=3#core"/>
+    <Style src="project://database/Assets/Scripts/Blocks/Common/Content/stylesheets/list-view.uss?fileID=7433441132597879392&amp;guid=0c25414d17a91d14e85428d6e27917f9&amp;type=3#list-view"/>
+    <Style src="project://database/Assets/Scripts/Blocks/Common/Content/stylesheets/modals.uss?fileID=7433441132597879392&amp;guid=cef182fc9fb448339fe32a55e8ba31b6&amp;type=3#modals"/>
+    <Style src="project://database/Assets/Scripts/Blocks/Common/Content/stylesheets/scroll-view.uss?fileID=7433441132597879392&amp;guid=8367ea085d4c40fa91a394d241392f22&amp;type=3#scroll-view"/>
+    <Style src="project://database/Assets/Scripts/Blocks/Common/Content/stylesheets/buttons.uss?fileID=7433441132597879392&amp;guid=24a81c4df0f34b7f8c53416ae3f8d529&amp;type=3#buttons"/>
+    <ui:VisualElement name="VisualElement" class="blocks-modal" style="flex-grow: 1; min-width: 74px; max-width: 434px; opacity: 1; padding-left: 10px; padding-right: 10px; padding-bottom: 0;">
+        <ui:ListView name="lstChat" class="unity-collection-view__item blocks-list-view--no-hover" style="min-width: 100%; min-height: 80%; opacity: 1;"/>
+        <ui:VisualElement style="flex-grow: 1; min-width: 100%;">
+            <ui:TextField label="Text Field" placeholder-text="message..." name="txtInput" class="blocks-textfield" style="min-width: 100%; max-height: 25%;"/>
+            <ui:Button text="Send" name="btnSend" class="blocks-button blocks-button--xs"/>
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

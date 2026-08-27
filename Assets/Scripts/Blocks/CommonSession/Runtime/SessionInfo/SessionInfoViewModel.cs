@@ -214,7 +214,7 @@ namespace Blocks.Sessions.Common
         }
 
         List<Players> m_PlayerStats;
-        
+
         public SessionInfoViewModel(string sessionType)
         {
             SessionProperties = new List<SessionProperty>();

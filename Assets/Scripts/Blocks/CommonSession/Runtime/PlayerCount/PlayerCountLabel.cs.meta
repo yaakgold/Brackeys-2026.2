@@ -5,5 +5,5 @@ AssetOrigin:
   productId: 341930
   packageName: Unity Building Block - Multiplayer Session
   packageVersion: 1.0
-  assetPath: Assets/Blocks/CommonSession/Runtime/PlayerCount/PlayerCountLabel.cs
+  assetPath: Assets/Scripts/Blocks/CommonSession/Runtime/PlayerCount/PlayerCountLabel.cs
   uploadId: 814574

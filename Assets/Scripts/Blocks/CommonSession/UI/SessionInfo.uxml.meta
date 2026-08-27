@@ -13,5 +13,5 @@ AssetOrigin:
   productId: 341930
   packageName: Unity Building Block - Multiplayer Session
   packageVersion: 1.0
-  assetPath: Assets/Blocks/CommonSession/UI/SessionInfo.uxml
+  assetPath: Assets/Scripts/Blocks/CommonSession/UI/SessionInfo.uxml
   uploadId: 814574

@@ -34,7 +34,7 @@ namespace Blocks.Sessions
             }
         }
         bool m_CanJoinSession;
-        
+
         [CreateProperty]
         public string SessionCode
         {
@@ -58,23 +58,11 @@ namespace Blocks.Sessions
             m_SessionObserver = new SessionObserver(sessionType);
 
             m_SessionObserver.SessionAdded += OnSessionAdded;
-            m_SessionObserver.AddingSessionStarted += OnAddingSessionStarted;
-            m_SessionObserver.AddingSessionFailed += OnAddingSessionFailed;
 
             if (m_SessionObserver.Session != null)
             {
                 OnSessionAdded(m_SessionObserver.Session);
             }
-        }
-
-        private void OnAddingSessionFailed(AddingSessionOptions arg1, SessionException arg2)
-        {
-            CanJoinSession = true;
-        }
-
-        private void OnAddingSessionStarted(AddingSessionOptions obj)
-        {
-            CanJoinSession = false;
         }
 
         static bool CheckIsSessionCodeFormatValid(string str)

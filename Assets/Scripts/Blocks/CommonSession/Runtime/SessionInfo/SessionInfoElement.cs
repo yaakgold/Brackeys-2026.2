@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using Blocks.Common;
 using Unity.Properties;
-using UnityEngine;
 using UnityEngine.UIElements;
 
 namespace Blocks.Sessions.Common
@@ -410,8 +409,6 @@ namespace Blocks.Sessions.Common
             scrollViewParent.Add(playerStatsListView);
             m_Bindings.Add(playerStatsBinding);
 
-            
-            Debug.Log("this was called");
             RegisterCallback<AttachToPanelEvent>(_ => UpdateBindings());
             RegisterCallback<DetachFromPanelEvent>(_ => CleanupBindings());
         }
@@ -425,17 +422,6 @@ namespace Blocks.Sessions.Common
             {
                 binding.dataSource = m_ViewModel;
             }
-            
-            var sessionContainerBinding = new DataBinding
-            {
-                dataSourcePath = new PropertyPath(nameof(SessionInfoViewModel.SessionInfoDisplayStyle)),
-                bindingMode = BindingMode.ToTarget,
-                dataSource = m_ViewModel
-            };
-            
-            Debug.Log(parent.name);
-            
-            SetBinding(new BindingId("style.display"), sessionContainerBinding);
         }
 
         void CleanupBindings()

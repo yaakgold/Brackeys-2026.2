@@ -120,5 +120,5 @@ AssetOrigin:
   productId: 341930
   packageName: Unity Building Block - Multiplayer Session
   packageVersion: 1.0
-  assetPath: Assets/Blocks/Common/Content/textures/reticle_circularcross.png
+  assetPath: Assets/Scripts/Blocks/Common/Content/textures/reticle_circularcross.png
   uploadId: 814574

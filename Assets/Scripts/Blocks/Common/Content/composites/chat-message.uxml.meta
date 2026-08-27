@@ -13,5 +13,5 @@ AssetOrigin:
   productId: 341930
   packageName: Unity Building Block - Multiplayer Session
   packageVersion: 1.0
-  assetPath: Assets/Blocks/Common/Content/composites/chat-message.uxml
+  assetPath: Assets/Scripts/Blocks/Common/Content/composites/chat-message.uxml
   uploadId: 814574

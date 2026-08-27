@@ -2,7 +2,6 @@ using System;
 using Blocks.Common;
 using Blocks.Sessions.Common;
 using Unity.Properties;
-using Unity.Services.Multiplayer;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -68,7 +67,7 @@ namespace Blocks.Sessions
                 Debug.LogError("Multiplayer Services are not initialized. You can initialize them with default settings by adding a ServicesInitialization and PlayerAuthentication components in your scene.");
                 return;
             }
-            
+
             _ = m_ViewModel.MatchmakeSessionAsync(QuickJoinSettings.ToQuickJoinOptions(), SessionSettings.ToSessionOptions());
         }
 

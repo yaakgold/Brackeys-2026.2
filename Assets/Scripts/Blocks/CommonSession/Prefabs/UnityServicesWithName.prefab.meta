@@ -10,5 +10,5 @@ AssetOrigin:
   productId: 341930
   packageName: Unity Building Block - Multiplayer Session
   packageVersion: 1.0
-  assetPath: Assets/Blocks/CommonSession/Prefabs/UnityServicesWithName.prefab
+  assetPath: Assets/Scripts/Blocks/CommonSession/Prefabs/UnityServicesWithName.prefab
   uploadId: 814574

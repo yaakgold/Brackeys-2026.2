@@ -2,7 +2,6 @@ using System;
 using System.Runtime.CompilerServices;
 using Unity.Properties;
 using Unity.Services.Multiplayer;
-using UnityEngine;
 using UnityEngine.UIElements;
 
 namespace Blocks.Sessions.Common
@@ -45,7 +44,6 @@ namespace Blocks.Sessions.Common
         void OnAddingSessionFailed(AddingSessionOptions sessionOptions, SessionException exception)
         {
             DisplayText = "Session operation failed: " + exception.Message;
-            Debug.Log(DisplayText);
         }
 
         void OnAddingSessionStarted(AddingSessionOptions sessionOptions)

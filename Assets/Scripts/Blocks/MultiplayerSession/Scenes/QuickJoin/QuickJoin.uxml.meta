@@ -13,5 +13,5 @@ AssetOrigin:
   productId: 341930
   packageName: Unity Building Block - Multiplayer Session
   packageVersion: 1.0
-  assetPath: Assets/Blocks/MultiplayerSession/Scenes/QuickJoin/QuickJoin.uxml
+  assetPath: Assets/Scripts/Blocks/MultiplayerSession/Scenes/QuickJoin/QuickJoin.uxml
   uploadId: 814574

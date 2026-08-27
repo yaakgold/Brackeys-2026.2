@@ -5,5 +5,5 @@ AssetOrigin:
   productId: 341930
   packageName: Unity Building Block - Multiplayer Session
   packageVersion: 1.0
-  assetPath: Assets/Blocks/MultiplayerSession/Runtime/QuickJoin/QuickJoinButton.cs
+  assetPath: Assets/Scripts/Blocks/MultiplayerSession/Runtime/QuickJoin/QuickJoinButton.cs
   uploadId: 814574

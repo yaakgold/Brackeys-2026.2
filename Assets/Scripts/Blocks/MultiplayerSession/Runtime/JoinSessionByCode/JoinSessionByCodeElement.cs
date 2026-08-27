@@ -74,7 +74,7 @@ namespace Blocks.Sessions
             createSessionButton.clicked += JoinSession;
             Add(createSessionButton);
             m_Bindings.Add(createSessionBinding);
-            
+
             RegisterCallback<AttachToPanelEvent>(_ => UpdateBindings());
             RegisterCallback<DetachFromPanelEvent>(_ => CleanupBindings());
         }
