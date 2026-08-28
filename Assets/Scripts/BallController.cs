@@ -35,7 +35,6 @@ public class BallController : MonoBehaviour
         }
         else
         {
-            print(other.gameObject.name);
             _breakoutController.StopMinigame();
         }
     }

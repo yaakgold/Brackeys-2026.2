@@ -31,6 +31,7 @@ public class ProjectManager : NetworkBehaviour
     [SerializeField] private int hour;
     [SerializeField] private int completionAmount;
     [SerializeField] private int numWordsToResetRouter;
+    [SerializeField] private int jamLength;
 
     private int _numWordsLeft;
     
@@ -43,7 +44,7 @@ public class ProjectManager : NetworkBehaviour
     
     public bool RouterBrokenToday { get; private set; }
     
-    private Dictionary<ulong, int> _dictTaskLog = new();
+    public readonly Dictionary<ulong, int> DictTaskLog = new();
     
     //Handle quality
     [Rpc(SendTo.Server)]
@@ -51,18 +52,27 @@ public class ProjectManager : NetworkBehaviour
     {
         qualityLevel += qualityAdd;
         SetQualityRpc(qualityLevel, ownerClientId);
+        
+        if (DictTaskLog.TryGetValue(ownerClientId, out var taskLog))
+        {
+            DictTaskLog[ownerClientId] += qualityAdd;
+        }
+        else
+        {
+            DictTaskLog[ownerClientId] = qualityAdd;
+        }
     }
 
     [Rpc(SendTo.ClientsAndHost)]
     private void SetQualityRpc(int q, ulong ownerClientId)
     {
-        if (_dictTaskLog.TryGetValue(ownerClientId, out var taskLog))
+        if (DictTaskLog.TryGetValue(ownerClientId, out var taskLog))
         {
-            _dictTaskLog[ownerClientId] += q - qualityLevel;
+            DictTaskLog[ownerClientId] += q - qualityLevel;
         }
         else
         {
-            _dictTaskLog[ownerClientId] = q - qualityLevel;
+            DictTaskLog[ownerClientId] = q - qualityLevel;
         }
         
         qualityLevel = q;
@@ -147,7 +157,14 @@ public class ProjectManager : NetworkBehaviour
     [Rpc(SendTo.ClientsAndHost)]
     private void EndOfDayRpc()
     {
-        UIManager.Instance.OpenEndOfDayUI();
+        if (dayNumber == jamLength)
+        {
+            UIManager.Instance.OpenEndOfJamUI();
+        }
+        else
+        {
+            UIManager.Instance.OpenEndOfDayUI();
+        }
     }
 
     [Rpc(SendTo.Server)]

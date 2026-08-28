@@ -24,12 +24,11 @@ public class UIManager : MonoBehaviour
 
     #endregion
 
-    [SerializeField] private GameObject endOfDayUI;
     [SerializeField] private TMP_Text dayText;
     [SerializeField] private TMP_Text hourText;
     [SerializeField] private Slider sanitySlider;
-    [SerializeField] private Button nextDayButton;
     [SerializeField] private EodPanelController eodPanelController;
+    [SerializeField] private EndOfJamPanel eojPanelController;
 
     private PlayerMovement _player;
     
@@ -37,15 +36,19 @@ public class UIManager : MonoBehaviour
     {
         //TODO: Handle what to do if other players are in menus. I think I am going to force them out, like Among Us
         _player.GetComponent<PlayerInput>().enabled = false;
-        endOfDayUI.SetActive(true);
-
-        eodPanelController.Setup();
+        eodPanelController.gameObject.SetActive(true);
     }
 
     public void CloseEndOfDayUI()
     {
-        endOfDayUI.SetActive(false);
+        eodPanelController.gameObject.SetActive(false);
         _player.GetComponent<PlayerInput>().enabled = true;
+    }
+
+    public void OpenEndOfJamUI()
+    {
+        eojPanelController.gameObject.SetActive(true);
+        _player.GetComponent<PlayerInput>().enabled = false;
     }
 
     public void SetDayText(int day)

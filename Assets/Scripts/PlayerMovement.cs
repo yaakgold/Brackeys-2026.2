@@ -32,8 +32,11 @@ public class PlayerMovement : NetworkBehaviour
         if (NetworkManager.Singleton.SpawnManager.GetLocalPlayerObject()
             .TryGetComponent(out MpPlayerController player))
         {
+            name = player.name;
             GameManager.Instance.onTick.AddListener(() => player.UpdateSanity(-GameManager.Instance.sanityDecreaseAmount));
         }
+        
+        ProjectManager.Instance.UpdateQualityRpc(0, OwnerClientId);
     }
 
     private Vector3 _lastPos;
