@@ -36,12 +36,17 @@ public class PlayerMovement : NetworkBehaviour
         }
     }
 
+    private Vector3 _lastPos;
+    
     private void LateUpdate()
     {
-        //TODO: Add logic to stop animation when not moving for clients
-        
         if (!IsOwner)
+        {
+            anim.SetBool(IsMoving, _lastPos != transform.position);
+            _lastPos = transform.position;
+
             return;
+        }
 
         if (_moveInput != Vector2.zero)
         {

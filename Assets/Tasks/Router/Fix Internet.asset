@@ -15,6 +15,7 @@ MonoBehaviour:
   title: Fix Internet
   description: Something happened, it needs to be fixed
   difficulty: 0
-  taskType: 0
+  taskType: 3
   effectAmount: 0
   timeToComplete: 3
+  minigamePrefab: {fileID: 3971417505667770145, guid: a6fbac1a32f73cf4d99be23ab85a3de2, type: 3}

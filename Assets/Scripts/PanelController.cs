@@ -53,9 +53,4 @@ public class PanelController : MonoBehaviour
     {
         gameObject.SetActive(false);
     }
-
-    public void ShowPanel()
-    {
-        gameObject.SetActive(true);
-    }
 }

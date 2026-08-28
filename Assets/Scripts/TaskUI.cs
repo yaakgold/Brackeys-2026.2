@@ -16,6 +16,11 @@ public class TaskUI : MonoBehaviour
     public void SetTask(GameTask t)
     {
         _task = t;
+
+        if (t.checkIfRouterBrokenToday)
+        {
+            interactButton.interactable = !ProjectManager.Instance.RouterBrokenToday;
+        }
         
         interactButton.onClick.AddListener(DoAction);
 
@@ -32,6 +37,7 @@ public class TaskUI : MonoBehaviour
 
     private void DoAction()
     {
+        interactButton.interactable = false;
         if (_task.minigamePrefab == null) return;
         
         MinigameController.Instance.StartMinigame(_task.minigamePrefab, _task);

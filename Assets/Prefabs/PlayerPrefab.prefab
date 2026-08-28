@@ -125,7 +125,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerMovement
   ShowTopMostFoldoutHeaderGroup: 1
-  moveSpeed: 5
+  moveSpeed: 6.5
   gfx: {fileID: 9190351843172584025}
   anim: {fileID: 6925312918170220189}
 --- !u!114 &4022203755960784996

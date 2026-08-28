@@ -13,7 +13,7 @@ public class GameSetup : NetworkBehaviour
     [SerializeField] private NetworkObject gameManagerPrefab;
     [SerializeField] private int timeDelay;
     
-    private List<MpPlayerController> _playerControllers = new();
+    private readonly List<MpPlayerController> _playerControllers = new();
     
     public MpPlayerController GetPlayerController(ulong ownerId)
     {

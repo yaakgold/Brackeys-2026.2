@@ -50,8 +50,6 @@ public class MinigameController : MonoBehaviour
 
     private void EndMinigame(int value)
     {
-        Destroy(_minigame);
-        
          switch (_task.taskType)
          {
              case ETaskType.Sanity:
@@ -63,7 +61,7 @@ public class MinigameController : MonoBehaviour
                  }
                  break;
              case ETaskType.Quality:
-                 ProjectManager.Instance.UpdateQualityRpc(value);
+                 ProjectManager.Instance.UpdateQualityRpc(value, NetworkManager.Singleton.LocalClientId);
                  break;
              case ETaskType.Sabotage:
                  break;
@@ -74,7 +72,13 @@ public class MinigameController : MonoBehaviour
          }
         ProjectManager.Instance.UpdateTimeRpc(_task.timeToComplete);
         
-        panelController.ShowPanel();
+        CloseMinigame();
+    }
+
+    public void CloseMinigame()
+    {
+        Destroy(_minigame);
         renderMinigame.SetActive(false);
+        panelController.ClosePanel();
     }
 }

@@ -11,6 +11,7 @@ public class GameTask : ScriptableObject
     public int effectAmount;
     public int timeToComplete;
     public GameObject minigamePrefab;
+    public bool checkIfRouterBrokenToday;
 
     private void OnValidate()
     {

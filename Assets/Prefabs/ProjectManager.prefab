@@ -74,4 +74,15 @@ MonoBehaviour:
   ShowTopMostFoldoutHeaderGroup: 1
   qualityLevel: 0
   dayNumber: 0
+  hour: 0
   completionAmount: 0
+  numWordsToResetRouter: 3
+  onRouterFixed:
+    m_PersistentCalls:
+      m_Calls: []
+  onRouterBroken:
+    m_PersistentCalls:
+      m_Calls: []
+  onNumWordsChanged:
+    m_PersistentCalls:
+      m_Calls: []

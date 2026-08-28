@@ -1,0 +1,12 @@
+<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/Scripts/Blocks/Common/Content/stylesheets/labels.uss?fileID=7433441132597879392&amp;guid=3967daf31cdfb2d4b8326839de2c378e&amp;type=3#labels"/>
+    <Style src="project://database/Assets/Scripts/Blocks/Common/Content/stylesheets/inputs.uss?fileID=7433441132597879392&amp;guid=e01aade3b4d44466be1a74cda2e4b773&amp;type=3#inputs"/>
+    <Style src="project://database/Assets/Scripts/Blocks/Common/Content/stylesheets/modals.uss?fileID=7433441132597879392&amp;guid=cef182fc9fb448339fe32a55e8ba31b6&amp;type=3#modals"/>
+    <ui:VisualElement style="flex-grow: 1; align-self: center; justify-content: center;">
+        <ui:VisualElement class="blocks-modal" style="flex-grow: 1; width: 500px; height: 350px; max-height: 350px;">
+            <ui:Label text="Enter 10 more words to reset the router" name="lblInstructions" class="blocks-header--space-bottom" style="color: rgb(175, 175, 175);"/>
+            <ui:Label text="sdklfjsdklfsdjfklsd" name="lblWordToType" class="blocks-header--space-bottom" style="color: rgb(175, 175, 175);"/>
+            <ui:TextField label="Text Field" placeholder-text="enter word..." name="tfInput" class="blocks-textfield"/>
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>
