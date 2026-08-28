@@ -15,6 +15,7 @@ MonoBehaviour:
   title: Do Easy Task
   description: This is an easy task to complete
   difficulty: 0
-  taskType: 0
+  taskType: 1
   effectAmount: 1
   timeToComplete: 1
+  minigamePrefab: {fileID: 5126527965705412149, guid: 5e16297e214fb9bd38765f37c7ba3a4d, type: 3}

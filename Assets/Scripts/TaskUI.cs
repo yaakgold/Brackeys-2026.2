@@ -32,31 +32,8 @@ public class TaskUI : MonoBehaviour
 
     private void DoAction()
     {
-        switch (_task.taskType)
-        {
-            case ETaskType.Sanity:
-                if (NetworkManager.Singleton.SpawnManager.GetLocalPlayerObject()
-                    .TryGetComponent(out MpPlayerController player))
-                {
-                    player.UpdateSanity(-_task.effectAmount);
-                }
-                break;
-            case ETaskType.Quality:
-                ProjectManager.Instance.UpdateQualityRpc(_task.effectAmount);
-                break;
-            case ETaskType.Sabotage:
-                break;
-            case ETaskType.Other:
-                break;
-            default:
-                throw new ArgumentOutOfRangeException();
-        }
+        if (_task.minigamePrefab == null) return;
         
-        ProjectManager.Instance.UpdateTimeRpc(_task.timeToComplete);
-        
-        //TODO: Setup the minigame system and remove the temp code above
-        // if (_task.minigamePrefab == null) return;
-        //
-        // Instantiate(_task.minigamePrefab);
+        MinigameController.Instance.StartMinigame(_task.minigamePrefab, _task);
     }
 }

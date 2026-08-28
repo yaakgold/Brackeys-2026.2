@@ -10,11 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 52507f97181d4ca69b3ec17ddc747f8f, type: 3}
-  m_Name: See commits
+  m_Name: Relax
   m_EditorClassIdentifier: Assembly-CSharp::GameTask
-  title: See commits
-  description: Show log of commits
+  title: Relax
+  description: Do some relaxing
   difficulty: 0
-  taskType: 3
-  effectAmount: 0
-  timeToComplete: 0
+  taskType: 0
+  effectAmount: 2
+  timeToComplete: 2
+  minigamePrefab: {fileID: 4520182378098800969, guid: 2bcce1dfdb80dcb56a03eed38dbdc244, type: 3}

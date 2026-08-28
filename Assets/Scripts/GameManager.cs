@@ -28,16 +28,19 @@ public class GameManager : NetworkBehaviour
             Destroy(gameObject);
             return;
         }
-        
+
+        StartCoroutine(Tick());
+        ProjectManager.Instance.UpdateDayRpc();
+    }
+    
+    public void SpawnPlayers()
+    {
         if (!NetworkManager.Singleton.IsHost && !NetworkManager.Singleton.IsServer) return;
         
         foreach (var id in NetworkManager.Singleton.ConnectedClientsIds)
         {
             NetworkManager.Singleton.SpawnManager.InstantiateAndSpawn(playerPrefab, id, isPlayerObject: true);
         }
-
-        StartCoroutine(Tick());
-        ProjectManager.Instance.UpdateDayRpc();
     }
 
     private IEnumerator Tick()

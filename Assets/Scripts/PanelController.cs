@@ -36,7 +36,7 @@ public class PanelController : MonoBehaviour
         }
     }
 
-    private void ClosePanel()
+    public void ClosePanel()
     {
         foreach (var obj in _taskPanels)
         {
@@ -47,5 +47,15 @@ public class PanelController : MonoBehaviour
         
         InteractionManager.Instance.FinishInteraction();
         gameObject.SetActive(false);
+    }
+
+    public void HidePanel()
+    {
+        gameObject.SetActive(false);
+    }
+
+    public void ShowPanel()
+    {
+        gameObject.SetActive(true);
     }
 }

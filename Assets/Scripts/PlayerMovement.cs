@@ -38,6 +38,8 @@ public class PlayerMovement : NetworkBehaviour
 
     private void LateUpdate()
     {
+        //TODO: Add logic to stop animation when not moving for clients
+        
         if (!IsOwner)
             return;
 

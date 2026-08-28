@@ -18,3 +18,4 @@ MonoBehaviour:
   taskType: 1
   effectAmount: 4
   timeToComplete: 2
+  minigamePrefab: {fileID: 4520182378098800969, guid: 2bcce1dfdb80dcb56a03eed38dbdc244, type: 3}

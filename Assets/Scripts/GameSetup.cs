@@ -37,7 +37,7 @@ public class GameSetup : NetworkBehaviour
         if (!NetworkManager.Singleton.IsHost && !NetworkManager.Singleton.IsServer) return;
         
         var randomId = GetRandomId(NetworkManager.Singleton.ConnectedClientsIds);
-        
+
         foreach (var id in NetworkManager.Singleton.ConnectedClientsIds)
         {
             var objs = NetworkManager.Singleton.SpawnManager.GetClientOwnedObjects(id);
@@ -67,16 +67,18 @@ public class GameSetup : NetworkBehaviour
     {
         yield return new WaitForSeconds(timeDelay);
         NetworkManager.Singleton.SceneManager.LoadScene("Main Game", LoadSceneMode.Single);
-        NetworkManager.Singleton.SceneManager.OnLoadComplete += SceneManagerOnOnLoadComplete;
+        NetworkManager.Singleton.SceneManager.OnLoadEventCompleted += SceneManagerOnOnLoadComplete;
     }
-    
-    private void SceneManagerOnOnLoadComplete(ulong clientId, string sceneName, LoadSceneMode loadSceneMode)
+
+    private void SceneManagerOnOnLoadComplete(string sceneName, LoadSceneMode loadSceneMode, List<ulong> clientsCompleted, List<ulong> clientsTimedOut)
     {
-        NetworkManager.Singleton.SceneManager.OnLoadComplete -= SceneManagerOnOnLoadComplete;
+        NetworkManager.Singleton.SceneManager.OnLoadEventCompleted -= SceneManagerOnOnLoadComplete;
         
         if (!NetworkManager.Singleton.IsHost && !NetworkManager.Singleton.IsServer) return;
             
         NetworkManager.Singleton.SpawnManager.InstantiateAndSpawn(gameManagerPrefab);
+        GameManager.Instance.SpawnPlayers();
+        
     }
     
     private Color GetRandomColor()

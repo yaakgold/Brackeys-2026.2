@@ -1,5 +1,7 @@
 using System;
+using System.Collections.Generic;
 using Blocks.Sessions.Common;
+using Text;
 using Unity.Netcode;
 using Unity.Properties;
 using Unity.Services.Authentication;
@@ -47,6 +49,8 @@ public class MainMenu : MonoBehaviour
         var playerName = _root.Q<TextField>("playerName")?.value;
         if (!playerName.IsNullOrEmpty())
             AuthenticationService.Instance.UpdatePlayerNameAsync(playerName);
+
+        ChatManager.Instance.EnableChat();
         
         _session.RemovedFromSession += SessionOnRemovedFromSession;
         _session.PlayerJoined += SessionOnPlayerJoined;
@@ -71,6 +75,7 @@ public class MainMenu : MonoBehaviour
     {
         _root.Q("join").style.display = DisplayStyle.Flex;
         _root.Q("currentSession").style.display = DisplayStyle.None;
+        ChatManager.Instance.DisableChat();
     }
 
     private void SessionObserverOnAddingSessionStarted(AddingSessionOptions obj)
@@ -127,12 +132,12 @@ public class MainMenu : MonoBehaviour
     {
         NetworkManager.Singleton.SceneManager.LoadScene("Game Setup", LoadSceneMode.Single);
         NetworkManager.Singleton.SpawnManager.InstantiateAndSpawn(projectManagerPrefab);
-        NetworkManager.Singleton.SceneManager.OnLoadComplete += SceneManagerOnOnLoadComplete;
+        NetworkManager.Singleton.SceneManager.OnLoadEventCompleted += SceneManagerOnOnLoadComplete;
     }
 
-    private void SceneManagerOnOnLoadComplete(ulong clientId, string sceneName, LoadSceneMode loadSceneMode)
+    private void SceneManagerOnOnLoadComplete(string sceneName, LoadSceneMode loadSceneMode, List<ulong> clientsCompleted, List<ulong> clientsTimedOut)
     {
-        NetworkManager.Singleton.SceneManager.OnLoadComplete -= SceneManagerOnOnLoadComplete;
+        NetworkManager.Singleton.SceneManager.OnLoadEventCompleted -= SceneManagerOnOnLoadComplete;
         
         if (!NetworkManager.Singleton.IsHost && !NetworkManager.Singleton.IsServer) return;
             

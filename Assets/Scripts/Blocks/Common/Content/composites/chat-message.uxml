@@ -1,7 +1,7 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
-    <Style src="./chat-message.uss" />
-    <ui:VisualElement>
-        <ui:Label text="Robi" name="sender" class="headline-small chat-message__sender" />
-        <ui:Label text="Yes i really like what you are writing me here its awesome." name="message" class="chat-message__text blocks-chat-message__text" />
+    <Style src="project://database/Assets/Scripts/Blocks/Common/Content/composites/chat-message.uss?fileID=7433441132597879392&amp;guid=a7fadc2a4fb2e466699f40e49e8984b9&amp;type=3#chat-message"/>
+    <ui:VisualElement style="flex-direction: column;">
+        <ui:Label text="Yaakov" name="sender" class="headline-small chat-message__sender" style="color: rgb(158, 158, 158);"/>
+        <ui:Label text="Yes i really like what you are writing me here its awesome." name="message" class="chat-message__text blocks-chat-message__text" style="color: rgb(159, 159, 159); border-bottom-color: rgb(219, 219, 219);"/>
     </ui:VisualElement>
 </ui:UXML>

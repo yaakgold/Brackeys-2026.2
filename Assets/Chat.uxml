@@ -5,8 +5,10 @@
     <Style src="project://database/Assets/Scripts/Blocks/Common/Content/stylesheets/modals.uss?fileID=7433441132597879392&amp;guid=cef182fc9fb448339fe32a55e8ba31b6&amp;type=3#modals"/>
     <Style src="project://database/Assets/Scripts/Blocks/Common/Content/stylesheets/scroll-view.uss?fileID=7433441132597879392&amp;guid=8367ea085d4c40fa91a394d241392f22&amp;type=3#scroll-view"/>
     <Style src="project://database/Assets/Scripts/Blocks/Common/Content/stylesheets/buttons.uss?fileID=7433441132597879392&amp;guid=24a81c4df0f34b7f8c53416ae3f8d529&amp;type=3#buttons"/>
-    <ui:VisualElement name="VisualElement" class="blocks-modal" style="flex-grow: 1; min-width: 74px; max-width: 434px; opacity: 1; padding-left: 10px; padding-right: 10px; padding-bottom: 0;">
-        <ui:ListView name="lstChat" class="unity-collection-view__item blocks-list-view--no-hover" style="min-width: 100%; min-height: 80%; opacity: 1;"/>
+    <Style src="project://database/Assets/stylesheet.uss?fileID=7433441132597879392&amp;guid=fe23e4d62800b17478c2330b29072283&amp;type=3#stylesheet"/>
+    <ui:Button text="Chat" name="btnChat" enabled="false" class="blocks-button" style="max-width: 76px; min-width: auto; max-height: 38px;"/>
+    <ui:VisualElement name="chatDisplay" class="blocks-modal" style="flex-grow: 1; min-width: 74px; max-width: 434px; opacity: 1; padding-left: 10px; padding-right: 10px; padding-bottom: 0; display: none;">
+        <ui:ListView name="lstChat" item-template="project://database/Assets/Scripts/Blocks/Common/Content/composites/chat-message.uxml?fileID=9197481963319205126&amp;guid=80bf5492419f84805a36cf30c440f229&amp;type=3#chat-message" show-border="false" focusable="false" data-source-type="Text.ChatManager, Assembly-CSharp" data-source-path="chats" fixed-item-height="60" virtualization-method="DynamicHeight" selection-type="None" class="unity-collection-view__item unity-list-view__item" style="min-width: 100%; min-height: 80%; opacity: 1; max-height: 80%; -unity-background-image-tint-color: rgb(0, 0, 0); flex-direction: column;"/>
         <ui:VisualElement style="flex-grow: 1; min-width: 100%;">
             <ui:TextField label="Text Field" placeholder-text="message..." name="txtInput" class="blocks-textfield" style="min-width: 100%; max-height: 25%;"/>
             <ui:Button text="Send" name="btnSend" class="blocks-button blocks-button--xs"/>

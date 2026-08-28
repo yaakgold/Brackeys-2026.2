@@ -29,6 +29,8 @@ public class ProjectManager : NetworkBehaviour
     [SerializeField] private int dayNumber;
     [SerializeField] private int hour;
     [SerializeField] private int completionAmount;
+
+    public int GetDay() => dayNumber;
     
     //Handle quality
     [Rpc(SendTo.Server)]

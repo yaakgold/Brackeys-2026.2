@@ -82,4 +82,4 @@ MonoBehaviour:
   - {r: 0.4722425, g: 0.109803915, b: 0.8, a: 1}
   - {r: 1, g: 0.22959584, b: 0.632307, a: 1}
   gameManagerPrefab: {fileID: 220067016710806620, guid: 7f731b9617c0d9d20b75785cdf1a0d1c, type: 3}
-  timeDelay: 10
+  timeDelay: 1
