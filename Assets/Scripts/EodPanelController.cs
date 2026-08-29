@@ -2,17 +2,17 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using JetBrains.Annotations;
-using TMPro;
 using Unity.Netcode;
 using Unity.Properties;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-[System.Serializable]
+[Serializable]
 public class PlayerEod
 {
     public ulong PlayerId { get; set; }
     public string PlayerName { get; set; }
+    public EPlayerRole Role { get; set; }
     public int QualityAdded { get; set; }
 }
 
@@ -21,7 +21,8 @@ public class EodPanelController : NetworkBehaviour
     [SerializeField] private PanelRenderer panelRenderer;
 
     private VisualElement _root;
-    private ListView _playerListView;
+    private MultiColumnListView _multiColumnListView;
+    
 
     private List<PlayerEod> _players;
     
@@ -33,7 +34,7 @@ public class EodPanelController : NetworkBehaviour
     {
         if (NetworkManager.Singleton.IsServer || NetworkManager.Singleton.IsHost)
         {
-            NetworkObject.Spawn();
+            //NetworkObject.Spawn();
         }
     }
 
@@ -55,10 +56,12 @@ public class EodPanelController : NetworkBehaviour
         _players = new List<PlayerEod>();
         foreach (var player in ProjectManager.Instance.DictTaskLog)
         {
+            var mpPlayer = GameSetup.Instance.GetPlayerController(player.Key);
             _players.Add(new PlayerEod()
             {
                 PlayerId = player.Key,
-                PlayerName = NetworkManager.Singleton.SpawnManager.GetPlayerNetworkObject(player.Key).gameObject.name,
+                PlayerName = mpPlayer.GetName(),
+                Role = mpPlayer.GetRole(),
                 QualityAdded = player.Value
             });
         }
@@ -79,32 +82,32 @@ public class EodPanelController : NetworkBehaviour
             }));
 
         
-        var multiColumnListView = _root.Q<MultiColumnListView>("mcListView");
-        multiColumnListView.itemsSource = _players;
-        multiColumnListView.columns[0].makeCell = () => new Label();
-        multiColumnListView.columns[1].makeCell = () => new Label();
-        multiColumnListView.columns[2].makeCell = () => new Button();
+        _multiColumnListView = _root.Q<MultiColumnListView>("mcListView");
+        _multiColumnListView.itemsSource = _players;
+        _multiColumnListView.columns[0].makeCell = () => new Label();
+        _multiColumnListView.columns[1].makeCell = () => new Label();
+        _multiColumnListView.columns[2].makeCell = () => new Button();
 
         //Player name
-        multiColumnListView.columns[0].bindCell = (element, i) =>
+        _multiColumnListView.columns[0].bindCell = (element, i) =>
         {
-            ((Label)element).text = _players[i].PlayerName;
+            ((Label)element).text = ((PlayerEod)_multiColumnListView.itemsSource[i]).PlayerName;
             ((Label)element).AddToClassList("blocks-label");
         };
         
         //Total Quality Added
-        multiColumnListView.columns[1].bindCell = (element, i) =>
+        _multiColumnListView.columns[1].bindCell = (element, i) =>
         {
-            ((Label)element).text = $"Total Quality Added: {_players[i].QualityAdded}";
+            ((Label)element).text = $"Total Quality Added: {((PlayerEod)_multiColumnListView.itemsSource[i]).QualityAdded}";
             ((Label)element).AddToClassList("blocks-label");
         };
         
         //Vote button
-        multiColumnListView.columns[2].bindCell = (element, i) =>
+        _multiColumnListView.columns[2].bindCell = (element, i) =>
         {
             ((Button)element).text = "Vote";
             ((Button)element).AddToClassList("blocks-button");
-            ((Button)element).RegisterCallback<ClickEvent>(evt => OnVoteClicked(_players[i]));
+            ((Button)element).RegisterCallback<ClickEvent>(evt => OnVoteClicked((PlayerEod)_multiColumnListView.itemsSource[i]));
 
             ((Button)element).dataSource = canVote;
             ((Button)element).SetBinding("enabledSelf", dataBinding);
@@ -115,6 +118,34 @@ public class EodPanelController : NetworkBehaviour
     {
         canVote = false;
         PlayerVotedServerRpc(player?.PlayerId ?? 9999);
+    }
+
+    public void OpenPanel()
+    {
+        _playerVotes = new Dictionary<ulong, int>();
+        _root.Q("pnlEod").style.display = DisplayStyle.Flex;
+        
+        var players = new List<PlayerEod>();
+        foreach (var player in ProjectManager.Instance.DictTaskLog)
+        {
+            var mpPlayer = GameSetup.Instance.GetPlayerController(player.Key);
+            players.Add(new PlayerEod()
+            {
+                PlayerId = player.Key,
+                PlayerName = mpPlayer.GetName(),
+                Role = mpPlayer.GetRole(),
+                QualityAdded = player.Value
+            });
+        }
+        _multiColumnListView.itemsSource = players;
+        _players = players;
+
+        _multiColumnListView.Rebuild();
+    }
+    
+    public void ClosePanel()
+    {
+        _root.Q("pnlEod").style.display = DisplayStyle.None;
     }
 
     [Rpc(SendTo.Server)]
@@ -129,8 +160,16 @@ public class EodPanelController : NetworkBehaviour
             _playerVotes[votedId] = 1;
         }
 
+        var votes = 0;
+        foreach (var playerVote in _playerVotes)
+        {
+            votes += playerVote.Value;
+        }
+
+        print(votes + " " + _players.Count);
+        
         //Close panel
-        if (_playerVotes.Count == _players.Count)
+        if (votes == _players.Count)
         {
             var player = _playerVotes.FirstOrDefault(pair => pair.Value >= Mathf.CeilToInt(_players.Count * .5f) 
                                                              && pair.Key != 9999);
@@ -140,8 +179,17 @@ public class EodPanelController : NetworkBehaviour
             {
                 //TODO: Handle a player being kicked off the team
             }
-        }
-        
+            canVote = true;
+            PlayerVotedClientRpc();
+            UIManager.Instance.CloseEndOfDayUI();
+        } 
+
+    }
+
+    [Rpc(SendTo.ClientsAndHost)]
+    private void PlayerVotedClientRpc()
+    {
+        canVote = true;
         UIManager.Instance.CloseEndOfDayUI();
     }
 }

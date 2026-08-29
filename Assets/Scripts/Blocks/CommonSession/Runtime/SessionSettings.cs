@@ -98,7 +98,7 @@ namespace Blocks.Sessions.Common
         {
             var options = new JoinSessionOptions
             {
-                Type = sessionType,
+                Type = sessionType
             };
 
             if (usePlayerName)

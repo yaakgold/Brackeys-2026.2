@@ -13,6 +13,9 @@ public class BreakoutController : Minigame
     private bool _isRunning;
     private int _brickStartCount;
 
+    public bool IsMovingLeft { get; private set; }
+    public bool IsMovingRight { get; private set; }
+    
     private void Start()
     {
         _brickStartCount = bricks.Count;
@@ -25,11 +28,19 @@ public class BreakoutController : Minigame
         
         if (Keyboard.current.aKey.isPressed || Keyboard.current.leftArrowKey.isPressed)
         {
+            IsMovingLeft = true;
+            IsMovingRight = false;
             paddle.transform.Translate(Vector2.left * (paddleSpeed * Time.deltaTime));
         }
         else if (Keyboard.current.dKey.isPressed || Keyboard.current.rightArrowKey.isPressed)
         {
+            IsMovingLeft = false;
+            IsMovingRight = true;
             paddle.transform.Translate(Vector2.right * (paddleSpeed * Time.deltaTime));
+        }
+        else
+        {
+            IsMovingLeft = IsMovingRight = false;
         }
     }
 

@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using Blocks.Common;
 using Blocks.Sessions.Common;
 using Unity.Properties;
+using Unity.Services.Multiplayer;
 using UnityEngine;
 using UnityEngine.UIElements;
 

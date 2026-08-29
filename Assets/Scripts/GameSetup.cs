@@ -51,6 +51,7 @@ public class GameSetup : NetworkBehaviour
                 if (!obj.TryGetComponent(out MpPlayerController player)) continue;
                 
                 _playerControllers.Add(player);
+                AddToListClientRpc(player);
                 
                 player.SetColorRpc(GetRandomColor());
 
@@ -66,6 +67,12 @@ public class GameSetup : NetworkBehaviour
         StartCoroutine(WaitForPlayerToReadInstructions());
     }
 
+    [Rpc(SendTo.ClientsAndHost)]
+    private void AddToListClientRpc(NetworkBehaviourReference player)
+    {
+        _playerControllers.Add((MpPlayerController)player);
+    }
+    
     private IEnumerator WaitForPlayerToReadInstructions()
     {
         yield return new WaitForSeconds(timeDelay);

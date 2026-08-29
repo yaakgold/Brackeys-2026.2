@@ -41,9 +41,10 @@ public class ProjectManager : NetworkBehaviour
     
     public int GetDay() => dayNumber;
     public int GetNumWords() => _numWordsLeft;
+    public int GetQuality() => qualityLevel;
     
     public bool RouterBrokenToday { get; private set; }
-    
+
     public readonly Dictionary<ulong, int> DictTaskLog = new();
     
     //Handle quality

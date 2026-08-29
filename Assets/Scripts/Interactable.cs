@@ -14,6 +14,8 @@ public class Interactable : NetworkBehaviour
     [SerializeField] private string interactionName;
     [SerializeField] private List<GameTask> tasks;
     [SerializeField] private string playerName;
+    
+    public bool HasPlayerName => !playerName.IsNullOrEmpty();
 
     private void OnTriggerEnter2D(Collider2D other)
     {
@@ -22,7 +24,7 @@ public class Interactable : NetworkBehaviour
             
         canvas.gameObject.SetActive(true);
         interactionText.text = $"{interactionName}\nPress 'E' to interact";
-        if (!playerName.IsNullOrEmpty())
+        if (HasPlayerName)
         {
             interactionText.text = $"{playerName}'s " + interactionText.text;
         }

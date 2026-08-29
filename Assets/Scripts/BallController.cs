@@ -27,6 +27,10 @@ public class BallController : MonoBehaviour
             {
                 _breakoutController.RemoveBrick(other.gameObject);
             }
+            else if (other.gameObject.CompareTag("Paddle"))
+            {
+                _moveDirection.x += .75f * (_breakoutController.IsMovingRight ?  -1 : 1);
+            }
             _moveDirection.y *= -1;
         }
         else if (other.gameObject.CompareTag("Wall"))
@@ -45,7 +49,7 @@ public class BallController : MonoBehaviour
         _speed = spd;
         _isMoving = true;
 
-        _moveDirection = new Vector2(Random.Range(-1.0f, 1), Random.Range(0.0f, 1));
+        _moveDirection = new Vector2(Random.Range(-.5f, 0.5f), Random.Range(0.5f, .6f));
     }
 
     public void StopMoving()

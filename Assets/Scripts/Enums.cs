@@ -18,3 +18,14 @@ public enum EPlayerRole
     Dev,
     BadGuy
 }
+
+public enum EGameQualityType
+{
+    Terrible,
+    Mediocre,
+    Average,
+    Good,
+    Great,
+    Excellent,
+    Perfect
+}

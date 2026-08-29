@@ -11,7 +11,10 @@ public class PanelController : MonoBehaviour
     private VisualElement _panel;
     private MultiColumnListView _taskListView;
     private Button _closeButton;
-    private Interactable _currentInteractable;
+    
+    private static Interactable _currentInteractable;
+    
+    public static Interactable CurrentInteractable => _currentInteractable;
     
     void OnEnable()
     {
@@ -33,6 +36,23 @@ public class PanelController : MonoBehaviour
         _closeButton.RegisterCallback<ClickEvent>(e => ClosePanel());
 
         _taskListView = _root.Q<MultiColumnListView>("mclvTasks");
+        _taskListView.columns[0].makeCell = () => new Label();
+        _taskListView.columns[1].makeCell = () => new Button();
+        
+        //Task Name
+        _taskListView.columns[0].bindCell = (element, i) =>
+        {
+            ((Label)element).text = ((GameTask)_taskListView.itemsSource[i]).title;
+            ((Label)element).AddToClassList("blocks-label");
+        };
+        
+        //Do Task button
+        _taskListView.columns[1].bindCell = (element, i) =>
+        {
+            ((Button)element).text = "Do Task";
+            ((Button)element).AddToClassList("blocks-button");
+            ((Button)element).RegisterCallbackOnce<ClickEvent>(evt => OnDoTaskClicked(((GameTask)_taskListView.itemsSource[i])));
+        };
     }
 
     public void OpenPanel(Interactable interactable, List<GameTask> tasks)
@@ -44,25 +64,7 @@ public class PanelController : MonoBehaviour
         _currentInteractable = interactable;
 
         _taskListView.itemsSource = tasks;
-        _taskListView.columns[0].makeCell = () => new Label();
-        _taskListView.columns[1].makeCell = () => new Button();
-        
-        //Task Name
-        _taskListView.columns[0].bindCell = (element, i) =>
-        {
-            ((Label)element).text = tasks[i].title;
-            ((Label)element).AddToClassList("blocks-label");
-        };
-        
-        //Vote button
-        _taskListView.columns[1].bindCell = (element, i) =>
-        {
-            ((Button)element).text = "Do Task";
-            ((Button)element).AddToClassList("blocks-button");
-            ((Button)element).RegisterCallback<ClickEvent>(evt => OnDoTaskClicked(tasks[i]));
-        };
-        
-        _taskListView.RefreshItems();
+        _taskListView.Rebuild();
     }
 
     private void OnDoTaskClicked(GameTask task)

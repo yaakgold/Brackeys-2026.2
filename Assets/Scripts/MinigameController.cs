@@ -50,6 +50,7 @@ public class MinigameController : MonoBehaviour
 
     private void EndMinigame(int value)
     {
+        value *= _task.isNegative ? -1 : 1;
          switch (_task.taskType)
          {
              case ETaskType.Sanity:
@@ -61,7 +62,13 @@ public class MinigameController : MonoBehaviour
                  }
                  break;
              case ETaskType.Quality:
-                 ProjectManager.Instance.UpdateQualityRpc(value, NetworkManager.Singleton.LocalClientId);
+                 var id = NetworkManager.Singleton.LocalClientId;
+                 
+                 if (PanelController.CurrentInteractable.HasPlayerName)
+                 {
+                     id = PanelController.CurrentInteractable.OwnerClientId;
+                 }
+                 ProjectManager.Instance.UpdateQualityRpc(value, id);
                  break;
              case ETaskType.Sabotage:
                  break;
@@ -77,6 +84,9 @@ public class MinigameController : MonoBehaviour
 
     public void CloseMinigame()
     {
+        if (!_minigame.TryGetComponent(out Minigame mc)) return;
+        mc.onCompleteMinigame.RemoveAllListeners();
+        
         Destroy(_minigame);
         renderMinigame.SetActive(false);
         panelController.ClosePanel();

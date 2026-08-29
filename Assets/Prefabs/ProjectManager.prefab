@@ -77,7 +77,7 @@ MonoBehaviour:
   hour: 0
   completionAmount: 0
   numWordsToResetRouter: 5
-  jamLength: 2
+  jamLength: 3
   onRouterFixed:
     m_PersistentCalls:
       m_Calls: []

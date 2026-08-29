@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Blocks.Sessions.Common;
 using Text;
@@ -8,6 +9,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
 using WebSocketSharp;
+using SessionProperty = Blocks.Sessions.Common.SessionProperty;
 
 public class MainMenu : MonoBehaviour
 {
@@ -28,7 +30,14 @@ public class MainMenu : MonoBehaviour
         _sessionObserver.AddingSessionFailed += SessionObserverOnAddingSessionFailed;
         _sessionObserver.SessionAdded += SessionObserverOnSessionAdded;
     }
-    
+
+    private void OnDestroy()
+    {
+        _sessionObserver.AddingSessionStarted -= SessionObserverOnAddingSessionStarted; 
+        _sessionObserver.AddingSessionFailed -= SessionObserverOnAddingSessionFailed;
+        _sessionObserver.SessionAdded -= SessionObserverOnSessionAdded;    
+    }
+
     void OnEnable()
     {
         panelRenderer.RegisterUIReloadCallback(OnUIReload);
@@ -42,7 +51,7 @@ public class MainMenu : MonoBehaviour
     private void SessionObserverOnSessionAdded(ISession obj)
     {
         _session = obj;
-
+        
         var playerName = _root.Q<TextField>("playerName")?.value;
         if (playerName != null && !playerName.IsNullOrEmpty())
         {
@@ -65,6 +74,8 @@ public class MainMenu : MonoBehaviour
 
     private void SessionOnPlayerLeaving(string obj)
     {
+        if (SceneManager.GetActiveScene().name != "Main Menu") return;
+        
         if (_session.PlayerCount <= 2)
         {
             _root.Q("btnStart").enabledSelf = false;
@@ -92,6 +103,8 @@ public class MainMenu : MonoBehaviour
 
     private void SessionOnPlayerJoined(string obj)
     {
+        if (SceneManager.GetActiveScene().name != "Main Menu") return;
+        
         if (_session.PlayerCount >= 2)
         {
             _root.Q("btnStart").enabledSelf = true;
@@ -123,7 +136,7 @@ public class MainMenu : MonoBehaviour
 
     private void OnExit(ClickEvent evt)
     {
-        Application.Quit();
+        Utilities.Quit();
     }
 
     private void OnJoin(ClickEvent evt)
@@ -134,6 +147,9 @@ public class MainMenu : MonoBehaviour
     
     void StartGame(ClickEvent evt)
     {
+        _session.AsHost().IsLocked = true;
+        _session.AsHost().IsPrivate = true;
+        
         NetworkManager.Singleton.SceneManager.LoadScene("Game Setup", LoadSceneMode.Single);
         NetworkManager.Singleton.SpawnManager.InstantiateAndSpawn(projectManagerPrefab);
         NetworkManager.Singleton.SceneManager.OnLoadEventCompleted += SceneManagerOnOnLoadComplete;

@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Unity.Services.Multiplayer;
 using UnityEngine;
 
@@ -17,7 +18,11 @@ namespace Blocks.Sessions
             return new QuickJoinOptions
             {
                 Timeout = System.TimeSpan.FromSeconds(timeout),
-                CreateSession = createSession
+                CreateSession = createSession,
+                Filters = new List<FilterOption>
+                {
+                    new(FilterField.IsLocked, "false", FilterOperation.Equal)
+                }
             };
         }
     }

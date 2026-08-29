@@ -63,7 +63,11 @@ public class PlayerMovement : NetworkBehaviour
 
     private void Move(Vector2 move)
     {
-        transform.Translate(move * (Time.deltaTime * moveSpeed));
+        var sanity = UIManager.Instance.GetSanity();
+        var moveSlowdown = sanity / 100.0f;
+        moveSlowdown = Mathf.Clamp(moveSlowdown, 0.25f, 1.0f);
+        
+        transform.Translate(move * (Time.deltaTime * moveSpeed * moveSlowdown));
         anim.SetBool(IsMoving, true);
     }
     
@@ -76,6 +80,11 @@ public class PlayerMovement : NetworkBehaviour
     public void OnInteract()
     {
         InteractionManager.Instance.Interact(this);
+    }
+
+    public void OnPause()
+    {
+        PausePanelController.Instance.Open();
     }
     
     //RPCs to interact with the server

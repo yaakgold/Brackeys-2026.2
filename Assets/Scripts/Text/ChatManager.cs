@@ -1,8 +1,6 @@
 using System;
 using System.Collections.Generic;
-using System.Net;
 using Unity.Netcode;
-using Unity.Properties;
 using Unity.Services.Authentication;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -18,7 +16,6 @@ namespace Text
             if (Instance == null)
             {
                 Instance = this;
-                DontDestroyOnLoad(gameObject);
             }
             else if (Instance != this)
             {

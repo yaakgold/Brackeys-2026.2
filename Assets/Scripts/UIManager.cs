@@ -55,23 +55,23 @@ public class UIManager : MonoBehaviour
         _hourLabel.text = $"Hour: {_hour}";
         _sanityProgressBar = _root.Q<ProgressBar>("pgbSanity");
     }
-
+    
     public void OpenEndOfDayUI()
     {
         //TODO: Handle what to do if other players are in menus. I think I am going to force them out, like Among Us
         _player.GetComponent<PlayerInput>().enabled = false;
-        eodPanelController.gameObject.SetActive(true);
+        eodPanelController.OpenPanel();
     }
 
     public void CloseEndOfDayUI()
     {
-        eodPanelController.gameObject.SetActive(false);
+        eodPanelController.ClosePanel();
         _player.GetComponent<PlayerInput>().enabled = true;
     }
 
     public void OpenEndOfJamUI()
     {
-        eojPanelController.gameObject.SetActive(true);
+        eojPanelController.OpenPanel();
         _player.GetComponent<PlayerInput>().enabled = false;
     }
 
@@ -100,6 +100,11 @@ public class UIManager : MonoBehaviour
     public void SetSanity(int sanity)
     {
         _sanityProgressBar.value = sanity;
+    }
+    
+    public int GetSanity()
+    {
+        return Mathf.FloorToInt(_sanityProgressBar.value);
     }
 
     public void SetPlayer(PlayerMovement playerMovement)
