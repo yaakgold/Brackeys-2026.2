@@ -1624,14 +1624,14 @@ PrefabInstance:
     - target: {fileID: 2927382792844064565, guid: 2651c2b4450cfd23d8900e32b98bc55d, type: 3}
       propertyPath: uiPanel
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 488616414}
     - target: {fileID: 2927382792844064565, guid: 2651c2b4450cfd23d8900e32b98bc55d, type: 3}
       propertyPath: interactionName
       value: Computer
       objectReference: {fileID: 0}
     - target: {fileID: 2927382792844064565, guid: 2651c2b4450cfd23d8900e32b98bc55d, type: 3}
       propertyPath: tasks.Array.size
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2927382792844064565, guid: 2651c2b4450cfd23d8900e32b98bc55d, type: 3}
       propertyPath: 'tasks.Array.data[0]'
@@ -1640,7 +1640,7 @@ PrefabInstance:
     - target: {fileID: 2927382792844064565, guid: 2651c2b4450cfd23d8900e32b98bc55d, type: 3}
       propertyPath: 'tasks.Array.data[1]'
       value: 
-      objectReference: {fileID: 11400000, guid: 7510fc5bc173471aeb5e3dd68d6b97f2, type: 2}
+      objectReference: {fileID: 11400000, guid: 887f621dc632e55aa9c2bbdff9bdca2e, type: 2}
     - target: {fileID: 2927382792844064565, guid: 2651c2b4450cfd23d8900e32b98bc55d, type: 3}
       propertyPath: 'tasks.Array.data[2]'
       value: 
@@ -2118,7 +2118,7 @@ PrefabInstance:
     - target: {fileID: 2927382792844064565, guid: 2651c2b4450cfd23d8900e32b98bc55d, type: 3}
       propertyPath: uiPanel
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 488616414}
     - target: {fileID: 2927382792844064565, guid: 2651c2b4450cfd23d8900e32b98bc55d, type: 3}
       propertyPath: interactionName
       value: TV
@@ -2427,14 +2427,14 @@ PrefabInstance:
     - target: {fileID: 2927382792844064565, guid: 2651c2b4450cfd23d8900e32b98bc55d, type: 3}
       propertyPath: uiPanel
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 488616414}
     - target: {fileID: 2927382792844064565, guid: 2651c2b4450cfd23d8900e32b98bc55d, type: 3}
       propertyPath: interactionName
       value: Computer
       objectReference: {fileID: 0}
     - target: {fileID: 2927382792844064565, guid: 2651c2b4450cfd23d8900e32b98bc55d, type: 3}
       propertyPath: tasks.Array.size
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2927382792844064565, guid: 2651c2b4450cfd23d8900e32b98bc55d, type: 3}
       propertyPath: 'tasks.Array.data[0]'
@@ -2443,7 +2443,7 @@ PrefabInstance:
     - target: {fileID: 2927382792844064565, guid: 2651c2b4450cfd23d8900e32b98bc55d, type: 3}
       propertyPath: 'tasks.Array.data[1]'
       value: 
-      objectReference: {fileID: 11400000, guid: 7510fc5bc173471aeb5e3dd68d6b97f2, type: 2}
+      objectReference: {fileID: 11400000, guid: 887f621dc632e55aa9c2bbdff9bdca2e, type: 2}
     - target: {fileID: 2927382792844064565, guid: 2651c2b4450cfd23d8900e32b98bc55d, type: 3}
       propertyPath: 'tasks.Array.data[2]'
       value: 
@@ -2773,14 +2773,14 @@ PrefabInstance:
     - target: {fileID: 2927382792844064565, guid: 2651c2b4450cfd23d8900e32b98bc55d, type: 3}
       propertyPath: uiPanel
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 488616414}
     - target: {fileID: 2927382792844064565, guid: 2651c2b4450cfd23d8900e32b98bc55d, type: 3}
       propertyPath: interactionName
       value: Computer
       objectReference: {fileID: 0}
     - target: {fileID: 2927382792844064565, guid: 2651c2b4450cfd23d8900e32b98bc55d, type: 3}
       propertyPath: tasks.Array.size
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2927382792844064565, guid: 2651c2b4450cfd23d8900e32b98bc55d, type: 3}
       propertyPath: 'tasks.Array.data[0]'
@@ -2789,7 +2789,7 @@ PrefabInstance:
     - target: {fileID: 2927382792844064565, guid: 2651c2b4450cfd23d8900e32b98bc55d, type: 3}
       propertyPath: 'tasks.Array.data[1]'
       value: 
-      objectReference: {fileID: 11400000, guid: 7510fc5bc173471aeb5e3dd68d6b97f2, type: 2}
+      objectReference: {fileID: 11400000, guid: 887f621dc632e55aa9c2bbdff9bdca2e, type: 2}
     - target: {fileID: 2927382792844064565, guid: 2651c2b4450cfd23d8900e32b98bc55d, type: 3}
       propertyPath: 'tasks.Array.data[2]'
       value: 
@@ -3193,14 +3193,14 @@ PrefabInstance:
     - target: {fileID: 2927382792844064565, guid: 2651c2b4450cfd23d8900e32b98bc55d, type: 3}
       propertyPath: uiPanel
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 488616414}
     - target: {fileID: 2927382792844064565, guid: 2651c2b4450cfd23d8900e32b98bc55d, type: 3}
       propertyPath: interactionName
       value: Computer
       objectReference: {fileID: 0}
     - target: {fileID: 2927382792844064565, guid: 2651c2b4450cfd23d8900e32b98bc55d, type: 3}
       propertyPath: tasks.Array.size
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2927382792844064565, guid: 2651c2b4450cfd23d8900e32b98bc55d, type: 3}
       propertyPath: 'tasks.Array.data[0]'
@@ -3209,7 +3209,7 @@ PrefabInstance:
     - target: {fileID: 2927382792844064565, guid: 2651c2b4450cfd23d8900e32b98bc55d, type: 3}
       propertyPath: 'tasks.Array.data[1]'
       value: 
-      objectReference: {fileID: 11400000, guid: 7510fc5bc173471aeb5e3dd68d6b97f2, type: 2}
+      objectReference: {fileID: 11400000, guid: 887f621dc632e55aa9c2bbdff9bdca2e, type: 2}
     - target: {fileID: 2927382792844064565, guid: 2651c2b4450cfd23d8900e32b98bc55d, type: 3}
       propertyPath: 'tasks.Array.data[2]'
       value: 
@@ -3571,7 +3571,7 @@ PrefabInstance:
     - target: {fileID: 2927382792844064565, guid: 2651c2b4450cfd23d8900e32b98bc55d, type: 3}
       propertyPath: uiPanel
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 488616414}
     - target: {fileID: 2927382792844064565, guid: 2651c2b4450cfd23d8900e32b98bc55d, type: 3}
       propertyPath: interactionName
       value: Bed
@@ -3699,7 +3699,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1931382934 &488616412
 PanelRenderer:
   m_ObjectHideFlags: 0
@@ -4531,14 +4531,14 @@ PrefabInstance:
     - target: {fileID: 2927382792844064565, guid: 2651c2b4450cfd23d8900e32b98bc55d, type: 3}
       propertyPath: uiPanel
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 488616414}
     - target: {fileID: 2927382792844064565, guid: 2651c2b4450cfd23d8900e32b98bc55d, type: 3}
       propertyPath: interactionName
       value: Computer
       objectReference: {fileID: 0}
     - target: {fileID: 2927382792844064565, guid: 2651c2b4450cfd23d8900e32b98bc55d, type: 3}
       propertyPath: tasks.Array.size
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2927382792844064565, guid: 2651c2b4450cfd23d8900e32b98bc55d, type: 3}
       propertyPath: 'tasks.Array.data[0]'
@@ -4547,7 +4547,7 @@ PrefabInstance:
     - target: {fileID: 2927382792844064565, guid: 2651c2b4450cfd23d8900e32b98bc55d, type: 3}
       propertyPath: 'tasks.Array.data[1]'
       value: 
-      objectReference: {fileID: 11400000, guid: 7510fc5bc173471aeb5e3dd68d6b97f2, type: 2}
+      objectReference: {fileID: 11400000, guid: 887f621dc632e55aa9c2bbdff9bdca2e, type: 2}
     - target: {fileID: 2927382792844064565, guid: 2651c2b4450cfd23d8900e32b98bc55d, type: 3}
       propertyPath: 'tasks.Array.data[2]'
       value: 
@@ -4901,7 +4901,7 @@ PrefabInstance:
     - target: {fileID: 2927382792844064565, guid: 2651c2b4450cfd23d8900e32b98bc55d, type: 3}
       propertyPath: uiPanel
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 488616414}
     - target: {fileID: 2927382792844064565, guid: 2651c2b4450cfd23d8900e32b98bc55d, type: 3}
       propertyPath: interactionName
       value: Table
@@ -5226,14 +5226,14 @@ PrefabInstance:
     - target: {fileID: 2927382792844064565, guid: 2651c2b4450cfd23d8900e32b98bc55d, type: 3}
       propertyPath: uiPanel
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 488616414}
     - target: {fileID: 2927382792844064565, guid: 2651c2b4450cfd23d8900e32b98bc55d, type: 3}
       propertyPath: interactionName
       value: Computer
       objectReference: {fileID: 0}
     - target: {fileID: 2927382792844064565, guid: 2651c2b4450cfd23d8900e32b98bc55d, type: 3}
       propertyPath: tasks.Array.size
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2927382792844064565, guid: 2651c2b4450cfd23d8900e32b98bc55d, type: 3}
       propertyPath: 'tasks.Array.data[0]'
@@ -5242,7 +5242,7 @@ PrefabInstance:
     - target: {fileID: 2927382792844064565, guid: 2651c2b4450cfd23d8900e32b98bc55d, type: 3}
       propertyPath: 'tasks.Array.data[1]'
       value: 
-      objectReference: {fileID: 11400000, guid: 7510fc5bc173471aeb5e3dd68d6b97f2, type: 2}
+      objectReference: {fileID: 11400000, guid: 887f621dc632e55aa9c2bbdff9bdca2e, type: 2}
     - target: {fileID: 2927382792844064565, guid: 2651c2b4450cfd23d8900e32b98bc55d, type: 3}
       propertyPath: 'tasks.Array.data[2]'
       value: 
@@ -5580,14 +5580,14 @@ PrefabInstance:
     - target: {fileID: 2927382792844064565, guid: 2651c2b4450cfd23d8900e32b98bc55d, type: 3}
       propertyPath: uiPanel
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 488616414}
     - target: {fileID: 2927382792844064565, guid: 2651c2b4450cfd23d8900e32b98bc55d, type: 3}
       propertyPath: interactionName
       value: Computer
       objectReference: {fileID: 0}
     - target: {fileID: 2927382792844064565, guid: 2651c2b4450cfd23d8900e32b98bc55d, type: 3}
       propertyPath: tasks.Array.size
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2927382792844064565, guid: 2651c2b4450cfd23d8900e32b98bc55d, type: 3}
       propertyPath: 'tasks.Array.data[0]'
@@ -5596,7 +5596,7 @@ PrefabInstance:
     - target: {fileID: 2927382792844064565, guid: 2651c2b4450cfd23d8900e32b98bc55d, type: 3}
       propertyPath: 'tasks.Array.data[1]'
       value: 
-      objectReference: {fileID: 11400000, guid: 7510fc5bc173471aeb5e3dd68d6b97f2, type: 2}
+      objectReference: {fileID: 11400000, guid: 887f621dc632e55aa9c2bbdff9bdca2e, type: 2}
     - target: {fileID: 2927382792844064565, guid: 2651c2b4450cfd23d8900e32b98bc55d, type: 3}
       propertyPath: 'tasks.Array.data[2]'
       value: 
@@ -5962,7 +5962,7 @@ PrefabInstance:
     - target: {fileID: 2927382792844064565, guid: 2651c2b4450cfd23d8900e32b98bc55d, type: 3}
       propertyPath: uiPanel
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 488616414}
     - target: {fileID: 2927382792844064565, guid: 2651c2b4450cfd23d8900e32b98bc55d, type: 3}
       propertyPath: interactionName
       value: Sink
@@ -6120,7 +6120,7 @@ PrefabInstance:
     - target: {fileID: 2927382792844064565, guid: 2651c2b4450cfd23d8900e32b98bc55d, type: 3}
       propertyPath: uiPanel
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 488616414}
     - target: {fileID: 2927382792844064565, guid: 2651c2b4450cfd23d8900e32b98bc55d, type: 3}
       propertyPath: interactionName
       value: Fridge
@@ -6376,14 +6376,14 @@ PrefabInstance:
     - target: {fileID: 2927382792844064565, guid: 2651c2b4450cfd23d8900e32b98bc55d, type: 3}
       propertyPath: uiPanel
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 488616414}
     - target: {fileID: 2927382792844064565, guid: 2651c2b4450cfd23d8900e32b98bc55d, type: 3}
       propertyPath: interactionName
       value: Computer
       objectReference: {fileID: 0}
     - target: {fileID: 2927382792844064565, guid: 2651c2b4450cfd23d8900e32b98bc55d, type: 3}
       propertyPath: tasks.Array.size
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2927382792844064565, guid: 2651c2b4450cfd23d8900e32b98bc55d, type: 3}
       propertyPath: 'tasks.Array.data[0]'
@@ -6392,7 +6392,7 @@ PrefabInstance:
     - target: {fileID: 2927382792844064565, guid: 2651c2b4450cfd23d8900e32b98bc55d, type: 3}
       propertyPath: 'tasks.Array.data[1]'
       value: 
-      objectReference: {fileID: 11400000, guid: 7510fc5bc173471aeb5e3dd68d6b97f2, type: 2}
+      objectReference: {fileID: 11400000, guid: 887f621dc632e55aa9c2bbdff9bdca2e, type: 2}
     - target: {fileID: 2927382792844064565, guid: 2651c2b4450cfd23d8900e32b98bc55d, type: 3}
       propertyPath: 'tasks.Array.data[2]'
       value: 
@@ -6698,7 +6698,7 @@ PrefabInstance:
     - target: {fileID: 2927382792844064565, guid: 2651c2b4450cfd23d8900e32b98bc55d, type: 3}
       propertyPath: uiPanel
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 488616414}
     - target: {fileID: 2927382792844064565, guid: 2651c2b4450cfd23d8900e32b98bc55d, type: 3}
       propertyPath: interactionName
       value: Couch
@@ -9746,7 +9746,7 @@ PrefabInstance:
     - target: {fileID: 2927382792844064565, guid: 2651c2b4450cfd23d8900e32b98bc55d, type: 3}
       propertyPath: uiPanel
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 488616414}
     - target: {fileID: 2927382792844064565, guid: 2651c2b4450cfd23d8900e32b98bc55d, type: 3}
       propertyPath: interactionName
       value: Router

@@ -1,8 +1,5 @@
-using System;
-using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.UI;
 using UnityEngine.UIElements;
 
 public class UIManager : MonoBehaviour
@@ -35,10 +32,17 @@ public class UIManager : MonoBehaviour
     private Label _dayLabel;
     private Label _hourLabel;
     private ProgressBar _sanityProgressBar;
+    private int _day;
+    private int _hour;
 
     private void OnEnable()
     {
         inGameUIPanel.RegisterUIReloadCallback(OnUIReload);
+    }
+
+    private void OnDisable()
+    {
+        inGameUIPanel.UnregisterUIReloadCallback(OnUIReload);
     }
 
     private void OnUIReload(PanelRenderer panelRenderer, VisualElement rootElement)
@@ -46,7 +50,9 @@ public class UIManager : MonoBehaviour
         _root = rootElement;
         
         _dayLabel = _root.Q<Label>("lblDay");
+        _dayLabel.text = $"Day: {_day}";
         _hourLabel = _root.Q<Label>("lblHour");
+        _hourLabel.text = $"Hour: {_hour}";
         _sanityProgressBar = _root.Q<ProgressBar>("pgbSanity");
     }
 
@@ -71,13 +77,20 @@ public class UIManager : MonoBehaviour
 
     public void SetDayText(int day)
     {
-        
-        _dayLabel.text = $"Day: {day}";
+        _day = day;
+        if (_dayLabel != null)
+        {
+            _dayLabel.text = $"Day: {day}";
+        }
     }
 
     public void SetHourText(int hour)
     {
-        _hourLabel.text = $"Hour: {hour}";
+        _hour = hour;
+        if (_hourLabel != null)
+        {
+            _hourLabel.text = $"Hour: {hour}";
+        }
     }
 
     /// <summary>

@@ -8,6 +8,7 @@ public class PanelController : MonoBehaviour
     [SerializeField] private PanelRenderer panelRenderer;
 
     private VisualElement _root;
+    private VisualElement _panel;
     private MultiColumnListView _taskListView;
     private Button _closeButton;
     private Interactable _currentInteractable;
@@ -16,24 +17,30 @@ public class PanelController : MonoBehaviour
     {
         panelRenderer.RegisterUIReloadCallback(OnUIReload);
     }
+    
+    void OnDisable()
+    {
+        panelRenderer.UnregisterUIReloadCallback(OnUIReload);
+    }
 
     private void OnUIReload(PanelRenderer renderer, VisualElement rootElement)
     {
         _root = rootElement;
-        
+
+        _panel = _root.Q<VisualElement>("pnlDisplay");
+
         _closeButton = _root.Q<Button>("btnClose");
         _closeButton.RegisterCallback<ClickEvent>(e => ClosePanel());
 
         _taskListView = _root.Q<MultiColumnListView>("mclvTasks");
     }
 
-    void OnDisable()
-    {
-        panelRenderer.UnregisterUIReloadCallback(OnUIReload);
-    }
-
     public void OpenPanel(Interactable interactable, List<GameTask> tasks)
     {
+        _panel.style.display = DisplayStyle.Flex;
+
+        _taskListView ??= _root.Q<MultiColumnListView>("mclvTasks");
+        
         _currentInteractable = interactable;
 
         _taskListView.itemsSource = tasks;
@@ -55,9 +62,7 @@ public class PanelController : MonoBehaviour
             ((Button)element).RegisterCallback<ClickEvent>(evt => OnDoTaskClicked(tasks[i]));
         };
         
-        _taskListView.Rebuild();
-        
-        gameObject.SetActive(true);
+        _taskListView.RefreshItems();
     }
 
     private void OnDoTaskClicked(GameTask task)
@@ -70,11 +75,14 @@ public class PanelController : MonoBehaviour
     public void ClosePanel()
     {
         InteractionManager.Instance.FinishInteraction();
-        gameObject.SetActive(false);
+        
+        _panel.style.display = DisplayStyle.None;
+        _taskListView.itemsSource = null;
+        _taskListView.RefreshItems();
     }
 
     public void HidePanel()
     {
-        gameObject.SetActive(false);
+        _panel.style.display = DisplayStyle.None;
     }
 }

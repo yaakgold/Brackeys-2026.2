@@ -3,6 +3,7 @@ using TMPro;
 using Unity.Netcode;
 using Unity.Services.Authentication;
 using UnityEngine;
+using WebSocketSharp;
 
 public class Interactable : NetworkBehaviour
 {
@@ -20,7 +21,11 @@ public class Interactable : NetworkBehaviour
         if (!player.IsOwner) return;
             
         canvas.gameObject.SetActive(true);
-        interactionText.text = $"{playerName}'s {interactionName}\nPress 'E' to interact";
+        interactionText.text = $"{interactionName}\nPress 'E' to interact";
+        if (!playerName.IsNullOrEmpty())
+        {
+            interactionText.text = $"{playerName}'s " + interactionText.text;
+        }
         InteractionManager.Instance.SetCurrentInteractable(this);
     }
 

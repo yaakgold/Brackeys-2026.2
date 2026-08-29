@@ -2,7 +2,7 @@
     <Style src="project://database/Assets/Scripts/Blocks/Common/Content/stylesheets/buttons.uss?fileID=7433441132597879392&amp;guid=24a81c4df0f34b7f8c53416ae3f8d529&amp;type=3#buttons"/>
     <Style src="project://database/Assets/Scripts/Blocks/Common/Content/stylesheets/progressbar.uss?fileID=7433441132597879392&amp;guid=560ab0d72fae04873ba6435f044289eb&amp;type=3#progressbar"/>
     <ui:VisualElement style="flex-grow: 1; width: 100%; height: 100%; max-height: 100%; max-width: 100%; align-self: center; align-content: auto; align-items: center; justify-content: center;">
-        <ui:VisualElement style="flex-grow: 1; width: 500px; height: 350px; max-height: 350px;">
+        <ui:VisualElement style="flex-grow: 1; width: 500px; height: 350px; max-height: 350px; color: rgb(159, 159, 159); background-color: rgb(97, 147, 96);">
             <ui:Image source="project://database/Assets/Images/Microwave.png?fileID=2800000&amp;guid=effbe5f52d231bcbb957b4786ecbe5cb&amp;type=3#Microwave" scale-mode="StretchToFill" style="min-width: 100%; min-height: 100%; flex-direction: column; justify-content: flex-start; position: relative; align-items: center; align-content: auto;">
                 <ui:ProgressBar value="0" title="00:00" name="pgbCookTime" class="blocks-progress-bar unity-progress-bar" style="position: absolute; right: 41px; top: 117px; max-width: 238px; width: 104px;"/>
                 <ui:Button text="Hold To Cook" name="btnCook" style="top: 188px; right: 38px; max-width: 120px; position: absolute; background-color: rgba(188, 188, 188, 0); color: rgb(159, 159, 159); border-left-color: rgba(149, 149, 149, 0); border-right-color: rgba(149, 149, 149, 0); border-top-color: rgba(149, 149, 149, 0); border-bottom-color: rgba(149, 149, 149, 0);"/>
