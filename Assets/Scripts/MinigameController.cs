@@ -31,6 +31,17 @@ public class MinigameController : MonoBehaviour
     private GameObject _minigame;
     private GameTask _task;
     
+    private void OnEnable()
+    {
+        Utilities.OnRestartApplication.AddListener(OnRestartApplication);
+    }
+
+    private void OnRestartApplication()
+    {
+        Utilities.OnRestartApplication.RemoveListener(OnRestartApplication);
+        Destroy(gameObject);
+    }
+    
     public void StartMinigame(GameObject minigame, GameTask task)
     {
         _task = task;

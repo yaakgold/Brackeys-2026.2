@@ -1,8 +1,5 @@
 using System.Collections.Generic;
-using Unity.Netcode;
-using Unity.Services.Multiplayer;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
 
 public class EndOfJamPanel : MonoBehaviour
@@ -11,6 +8,8 @@ public class EndOfJamPanel : MonoBehaviour
 
     private VisualElement _root;
     private MultiColumnListView _multiColumnListView;
+    private int _totalQuality;
+    private EGameQualityType _qualityType;
     
     private void OnEnable()
     {
@@ -25,38 +24,15 @@ public class EndOfJamPanel : MonoBehaviour
     private void OnUIReload(PanelRenderer renderer, VisualElement rootElement)
     {
         _root = rootElement;
-
-        var qualityType = EGameQualityType.Excellent;
-        
-        _root.Q<Label>("lblTotalQualityAdded").text = 
-            $"You made a game with a quality level of: {ProjectManager.Instance.GetQuality()}\n" +
-            $"This is considered a(n) {qualityType.ToString().ToLower()} game";
         
         _root.Q<Button>("btnLeave").RegisterCallback<ClickEvent>(e =>
         {
-            MultiplayerService.Instance.Sessions["default-session"].LeaveAsync();
-            SceneManager.LoadScene("Main Menu");
-            Destroy(PausePanelController.Instance.gameObject);
+            Utilities.LeaveSession();
         });
         
-        var players = new List<PlayerEod>();
-        foreach (var player in ProjectManager.Instance.DictTaskLog)
-        {
-            var mpPlayer = GameSetup.Instance.GetPlayerController(player.Key);
-            players.Add(new PlayerEod()
-            {
-                PlayerId = player.Key,
-                PlayerName = mpPlayer.GetName(),
-                Role = mpPlayer.GetRole(),
-                QualityAdded = player.Value
-            });
-        }
-        
         _multiColumnListView = _root.Q<MultiColumnListView>("mclvEndResults");
-        print(_multiColumnListView);
         if (_multiColumnListView == null) return;
         
-        _multiColumnListView.itemsSource = players;
         _multiColumnListView.columns[0].makeCell = () => new Label();
         _multiColumnListView.columns[1].makeCell = () => new Label();
         _multiColumnListView.columns[2].makeCell = () => new Label();
@@ -79,6 +55,7 @@ public class EndOfJamPanel : MonoBehaviour
         _multiColumnListView.columns[2].bindCell = (element, i) =>
         {
             ((Label)element).text = ((PlayerEod)_multiColumnListView.itemsSource[i]).Role.ToString();
+            ((Label)element).AddToClassList("blocks-label");
         };
     }
     
@@ -86,6 +63,7 @@ public class EndOfJamPanel : MonoBehaviour
     {
         _root.Q("pnlEndOfJam").style.display = DisplayStyle.Flex;
         
+        _totalQuality = 0;
         var players = new List<PlayerEod>();
         foreach (var player in ProjectManager.Instance.DictTaskLog)
         {
@@ -97,7 +75,27 @@ public class EndOfJamPanel : MonoBehaviour
                 Role = mpPlayer.GetRole(),
                 QualityAdded = player.Value
             });
+            
+            _totalQuality += player.Value;
+            print(_totalQuality + " Other");
         }
+
+        //TODO: Is this good values????
+        _qualityType = _totalQuality switch
+        {
+            > 30 => EGameQualityType.Perfect,
+            > 25 => EGameQualityType.Excellent,
+            > 20 => EGameQualityType.Great,
+            > 15 => EGameQualityType.Good,
+            > 10 => EGameQualityType.Average,
+            > 5  => EGameQualityType.Mediocre,
+            _ => EGameQualityType.Terrible
+        };
+        
+        _root.Q<Label>("lblTotalQualityAdded").text = 
+            $"You made a game with a quality level of: {ProjectManager.Instance.GetQuality()}\n" +
+            $"This is considered a(n) {_qualityType.ToString().ToLower()} game";
+        
         _multiColumnListView.itemsSource = players;
 
         _multiColumnListView.Rebuild();

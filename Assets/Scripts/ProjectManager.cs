@@ -47,6 +47,17 @@ public class ProjectManager : NetworkBehaviour
 
     public readonly Dictionary<ulong, int> DictTaskLog = new();
     
+    private void OnEnable()
+    {
+        Utilities.OnRestartApplication.AddListener(OnRestartApplication);
+    }
+
+    private void OnRestartApplication()
+    {
+        Utilities.OnRestartApplication.RemoveListener(OnRestartApplication);
+        Destroy(gameObject);
+    }
+    
     //Handle quality
     [Rpc(SendTo.Server)]
     public void UpdateQualityRpc(int qualityAdd, ulong ownerClientId)

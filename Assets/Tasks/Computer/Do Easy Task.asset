@@ -20,3 +20,5 @@ MonoBehaviour:
   timeToComplete: 24
   minigamePrefab: {fileID: 5126527965705412149, guid: 5e16297e214fb9bd38765f37c7ba3a4d, type: 3}
   checkIfRouterBrokenToday: 0
+  checkIfRouterIsCurrentlyBroken: 1
+  isNegative: 0

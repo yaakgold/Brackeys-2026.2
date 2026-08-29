@@ -51,24 +51,16 @@ public class PlayerMovement : NetworkBehaviour
             return;
         }
 
-        if (_moveInput != Vector2.zero)
-        {
-            UpdateInputServerRpc(_moveInput);
-        }
-        else
-        {
-            anim.SetBool(IsMoving, false);
-        }
+        UpdateInputServerRpc(_moveInput);
     }
 
     private void Move(Vector2 move)
     {
         var sanity = UIManager.Instance.GetSanity();
-        var moveSlowdown = sanity / 100.0f;
+        var moveSlowdown = sanity / 50.0f;
         moveSlowdown = Mathf.Clamp(moveSlowdown, 0.25f, 1.0f);
         
         transform.Translate(move * (Time.deltaTime * moveSpeed * moveSlowdown));
-        anim.SetBool(IsMoving, true);
     }
     
     //Get inputs from the PlayerInput script
@@ -93,6 +85,22 @@ public class PlayerMovement : NetworkBehaviour
     private void UpdateInputServerRpc(Vector2 move)
     {
         Move(move);
+        UpdateClientMovementRpc(move);
+    }
+
+    [Rpc(SendTo.ClientsAndHost)]
+    private void UpdateClientMovementRpc(Vector2 move)
+    {
+        if (move.sqrMagnitude > .01f)
+        {
+            AudioManager.Instance.Play("Walk");
+            anim.SetBool(IsMoving, true);
+        }
+        else
+        {
+            AudioManager.Instance.Stop("Walk");
+            anim.SetBool(IsMoving, false);
+        }
     }
 
     [Rpc(SendTo.Server)]
@@ -117,4 +125,5 @@ public class PlayerMovement : NetworkBehaviour
         }
     }
 }
+
 

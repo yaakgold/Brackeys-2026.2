@@ -25,6 +25,7 @@ public class DropController : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Bucket"))
         {
+            AudioManager.Instance.Play("Basket Catch");
             _controller.CollectDrop(this);
         }
         else

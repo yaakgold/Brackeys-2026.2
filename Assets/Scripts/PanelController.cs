@@ -13,17 +13,35 @@ public class PanelController : MonoBehaviour
     private Button _closeButton;
     
     private static Interactable _currentInteractable;
+    private bool _isRouterBroken;
+    
+    private const string DoTask = "Do Task";
+    private const string FixRouter = "Fix Router";
     
     public static Interactable CurrentInteractable => _currentInteractable;
     
     void OnEnable()
     {
         panelRenderer.RegisterUIReloadCallback(OnUIReload);
+        ProjectManager.Instance.onRouterBroken.AddListener(OnRouterBroken);
+        ProjectManager.Instance.onRouterFixed.AddListener(OnRouterFixed);
     }
-    
+
     void OnDisable()
     {
         panelRenderer.UnregisterUIReloadCallback(OnUIReload);
+        ProjectManager.Instance.onRouterBroken.RemoveListener(OnRouterBroken);
+        ProjectManager.Instance.onRouterFixed.RemoveListener(OnRouterFixed);
+    }
+    
+    private void OnRouterBroken()
+    {
+        _isRouterBroken = true;
+    }
+    
+    private void OnRouterFixed()
+    {
+        _isRouterBroken = false;
     }
 
     private void OnUIReload(PanelRenderer renderer, VisualElement rootElement)
@@ -49,9 +67,28 @@ public class PanelController : MonoBehaviour
         //Do Task button
         _taskListView.columns[1].bindCell = (element, i) =>
         {
-            ((Button)element).text = "Do Task";
+            var gameTask = (GameTask)_taskListView.itemsSource[i];
+            if (_isRouterBroken && gameTask.checkIfRouterIsCurrentlyBroken)
+            {
+                ((Button)element).text = FixRouter;
+            }
+            else
+            {
+                ((Button)element).text = "Do Task";
+            }
             ((Button)element).AddToClassList("blocks-button");
-            ((Button)element).RegisterCallbackOnce<ClickEvent>(evt => OnDoTaskClicked(((GameTask)_taskListView.itemsSource[i])));
+            ((Button)element).RegisterCallbackOnce<ClickEvent>(evt => OnDoTaskClicked(gameTask));
+
+            if (!gameTask.checkIfRouterIsCurrentlyBroken) return;
+
+            var dataBinding = new DataBinding
+            {
+                bindingMode = BindingMode.ToTarget,
+                dataSource = !_isRouterBroken
+            };
+            
+            ((Button)element).SetBinding("enabledSelf", dataBinding);
+            ((Button)element).dataSource = !_isRouterBroken;
         };
     }
 

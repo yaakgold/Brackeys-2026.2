@@ -18,6 +18,17 @@ public class MpPlayerController : NetworkBehaviour
     {
         playerRole = EPlayerRole.Dev;
     }
+    
+    private void OnEnable()
+    {
+        Utilities.OnRestartApplication.AddListener(OnRestartApplication);
+    }
+
+    private void OnRestartApplication()
+    {
+        Utilities.OnRestartApplication.RemoveListener(OnRestartApplication);
+        Destroy(gameObject);
+    }
 
     public override void OnNetworkSpawn()
     {

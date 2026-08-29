@@ -41,6 +41,7 @@ public class GetWaterController : Minigame
     }
     private void OnFillDown(PointerDownEvent evt)
     {
+        AudioManager.Instance.Play("Water Pour");
         _waterChangeCoroutine = WaterChangeCo();
         StartCoroutine(_waterChangeCoroutine);
         
@@ -56,6 +57,8 @@ public class GetWaterController : Minigame
     public override void StopMinigame()
     {
         base.StopMinigame();
+        
+        AudioManager.Instance.Stop("Water Pour");
         
         StopCoroutine(_waterChangeCoroutine);
         StopCoroutine(_cupChangeCoroutine);

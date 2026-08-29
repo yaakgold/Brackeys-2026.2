@@ -27,6 +27,17 @@ public class InteractionManager : MonoBehaviour
 
     private PlayerMovement player;
 
+    private void OnEnable()
+    {
+        Utilities.OnRestartApplication.AddListener(OnRestartApplication);
+    }
+
+    private void OnRestartApplication()
+    {
+        Utilities.OnRestartApplication.RemoveListener(OnRestartApplication);
+        Destroy(gameObject);
+    }
+    
     public void SetCurrentInteractable(Interactable interactable)
     {
         currentInteractable = interactable;

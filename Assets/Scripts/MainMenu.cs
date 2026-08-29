@@ -6,10 +6,10 @@ using Unity.Netcode;
 using Unity.Services.Authentication;
 using Unity.Services.Multiplayer;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
 using WebSocketSharp;
-using SessionProperty = Blocks.Sessions.Common.SessionProperty;
 
 public class MainMenu : MonoBehaviour
 {
@@ -21,6 +21,11 @@ public class MainMenu : MonoBehaviour
     private VisualElement _root;
     private SessionObserver _sessionObserver;
     private ISession _session;
+
+    private void Awake()
+    {
+        Utilities.OnRestartApplication = new UnityEvent();
+    }
 
     private void Start()
     {
@@ -84,9 +89,17 @@ public class MainMenu : MonoBehaviour
 
     private void SessionOnRemovedFromSession()
     {
-        _root.Q("join").style.display = DisplayStyle.Flex;
-        _root.Q("currentSession").style.display = DisplayStyle.None;
-        ChatManager.Instance.DisableChat();
+        if (SceneManager.GetActiveScene().name != "Main Menu")
+        {
+            SceneManager.LoadScene("Main Menu");
+            Utilities.OnRestartApplication.Invoke();
+        }
+        else
+        {
+            _root.Q("join").style.display = DisplayStyle.Flex;
+            _root.Q("currentSession").style.display = DisplayStyle.None;
+            ChatManager.Instance.DisableChat();   
+        }
     }
 
     private void SessionObserverOnAddingSessionStarted(AddingSessionOptions obj)

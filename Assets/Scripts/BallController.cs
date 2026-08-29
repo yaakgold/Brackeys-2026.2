@@ -19,6 +19,8 @@ public class BallController : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D other)
     {
+        AudioManager.Instance.Play("Ball Hit");
+        
         if (other.gameObject.CompareTag("Brick")
             || other.gameObject.CompareTag("Paddle")
             || other.gameObject.CompareTag("TopWall"))

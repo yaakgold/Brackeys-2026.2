@@ -52,6 +52,8 @@ public class EodPanelController : NetworkBehaviour
     {
         _root = rootElement;
 
+        _root.Q<Label>("lblTitle").text = $"End Of Day {ProjectManager.Instance.GetDay()}";
+        
         _playerVotes = new Dictionary<ulong, int>();
         _players = new List<PlayerEod>();
         foreach (var player in ProjectManager.Instance.DictTaskLog)
@@ -125,6 +127,8 @@ public class EodPanelController : NetworkBehaviour
         _playerVotes = new Dictionary<ulong, int>();
         _root.Q("pnlEod").style.display = DisplayStyle.Flex;
         
+        _root.Q<Label>("lblTitle").text = $"End Of Day {ProjectManager.Instance.GetDay()}";
+        
         var players = new List<PlayerEod>();
         foreach (var player in ProjectManager.Instance.DictTaskLog)
         {
@@ -165,8 +169,6 @@ public class EodPanelController : NetworkBehaviour
         {
             votes += playerVote.Value;
         }
-
-        print(votes + " " + _players.Count);
         
         //Close panel
         if (votes == _players.Count)

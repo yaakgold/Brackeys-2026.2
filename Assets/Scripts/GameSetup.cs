@@ -19,6 +19,17 @@ public class GameSetup : NetworkBehaviour
     {
         return _playerControllers.FirstOrDefault(p => p.OwnerClientId == ownerId);
     }
+    
+    private void OnEnable()
+    {
+        Utilities.OnRestartApplication.AddListener(OnRestartApplication);
+    }
+
+    private void OnRestartApplication()
+    {
+        Utilities.OnRestartApplication.RemoveListener(OnRestartApplication);
+        Destroy(gameObject);
+    }
 
     public override void OnNetworkSpawn()
     {

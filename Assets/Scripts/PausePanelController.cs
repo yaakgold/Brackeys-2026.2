@@ -33,11 +33,18 @@ public class PausePanelController : MonoBehaviour
     void OnEnable()
     {
         panelRenderer.RegisterUIReloadCallback(OnUIReload);
+        Utilities.OnRestartApplication.AddListener(OnRestartApplication);
     }
 
     void OnDisable()
     {
         panelRenderer.UnregisterUIReloadCallback(OnUIReload);
+    }
+
+    private void OnRestartApplication()
+    {
+        Utilities.OnRestartApplication.RemoveListener(OnRestartApplication);
+        Destroy(gameObject);
     }
 
     void OnUIReload(PanelRenderer renderer, VisualElement rootElement)
@@ -50,13 +57,10 @@ public class PausePanelController : MonoBehaviour
             GameManager.Instance.SetPaused(false);
         });
         
-        _root.Q<Button>("btnOptions").RegisterCallback<ClickEvent>(evt => print("Need to make options panel"));
-        
         _root.Q<Button>("btnLeaveGame").RegisterCallback<ClickEvent>(evt =>
         {
-            MultiplayerService.Instance.Sessions["default-session"].LeaveAsync();
-            SceneManager.LoadScene("Main Menu");
-            Destroy(gameObject);
+            _root.Q("pnlPause").style.display = DisplayStyle.None;
+            Utilities.LeaveSession();
         });
         
         _root.Q<Button>("btnQuitGame").RegisterCallback<ClickEvent>(evt =>

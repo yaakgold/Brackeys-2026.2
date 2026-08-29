@@ -38,12 +38,20 @@ public class UIManager : MonoBehaviour
     private void OnEnable()
     {
         inGameUIPanel.RegisterUIReloadCallback(OnUIReload);
+        Utilities.OnRestartApplication.AddListener(OnRestartApplication);
     }
 
     private void OnDisable()
     {
         inGameUIPanel.UnregisterUIReloadCallback(OnUIReload);
     }
+
+    private void OnRestartApplication()
+    {
+        Utilities.OnRestartApplication.RemoveListener(OnRestartApplication);
+        Destroy(gameObject);
+    }
+    
 
     private void OnUIReload(PanelRenderer panelRenderer, VisualElement rootElement)
     {

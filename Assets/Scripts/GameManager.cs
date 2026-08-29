@@ -1,9 +1,11 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.Events;
+using Random = UnityEngine.Random;
 
 public class GameManager : NetworkBehaviour
 {
@@ -15,7 +17,18 @@ public class GameManager : NetworkBehaviour
     public int sanityDecreaseAmount;
     public bool IsPaused { get; private set; } = false;
     public UnityEvent onTick;
-    
+
+    private void OnEnable()
+    {
+        Utilities.OnRestartApplication.AddListener(OnRestartApplication);
+    }
+
+    private void OnRestartApplication()
+    {
+        Utilities.OnRestartApplication.RemoveListener(OnRestartApplication);
+        Destroy(gameObject);
+    }
+
     public override void OnNetworkSpawn()
     {
         base.OnNetworkSpawn();

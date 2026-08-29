@@ -4,7 +4,6 @@
     <Style src="project://database/Assets/Scripts/Blocks/Common/Content/stylesheets/buttons.uss?fileID=7433441132597879392&amp;guid=24a81c4df0f34b7f8c53416ae3f8d529&amp;type=3#buttons"/>
     <ui:VisualElement name="pnlPause" class="blocks-modal" style="flex-grow: 1; position: absolute; left: 30%; right: 30%; width: 40%; max-width: 40%; top: 10%; bottom: 10%; background-color: rgba(16, 16, 16, 0.992); display: none;">
         <ui:Label text="Paused" class="blocks-header blocks-header--space-bottom" style="font-size: 60px;"/>
-        <ui:Button text="Options" name="btnOptions" class="blocks-button" style="margin-top: 10px; margin-bottom: 10px;"/>
         <ui:Button text="Leave Match" name="btnLeaveGame" class="blocks-button" style="margin-top: 10px; margin-bottom: 10px;"/>
         <ui:Button text="Close Game" name="btnQuitGame" class="blocks-button" style="margin-top: 10px; margin-bottom: 10px;"/>
         <ui:Button text="Resume" name="btnCloseMenu" class="blocks-button" style="position: absolute; right: 10px; bottom: 10px; display: flex;"/>
