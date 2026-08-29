@@ -6,7 +6,7 @@
             <ui:Image source="project://database/Assets/Images/Microwave.png?fileID=2800000&amp;guid=effbe5f52d231bcbb957b4786ecbe5cb&amp;type=3#Microwave" scale-mode="StretchToFill" style="min-width: 100%; min-height: 100%; flex-direction: column; justify-content: flex-start; position: relative; align-items: center; align-content: auto;">
                 <ui:ProgressBar value="0" title="00:00" name="pgbCookTime" class="blocks-progress-bar unity-progress-bar" style="position: absolute; right: 41px; top: 117px; max-width: 238px; width: 104px;"/>
                 <ui:Button text="Hold To Cook" name="btnCook" style="top: 188px; right: 38px; max-width: 120px; position: absolute; background-color: rgba(188, 188, 188, 0); color: rgb(159, 159, 159); border-left-color: rgba(149, 149, 149, 0); border-right-color: rgba(149, 149, 149, 0); border-top-color: rgba(149, 149, 149, 0); border-bottom-color: rgba(149, 149, 149, 0);"/>
-                <ui:Label text="Cook until 4:58" name="lblRequestedCookTime" style="position: absolute; top: 0; left: auto; right: auto;"/>
+                <ui:Label text="Cook until 4:58" name="lblRequestedCookTime" style="position: absolute; top: 0; left: auto; right: auto; color: rgb(0, 0, 0);"/>
             </ui:Image>
         </ui:VisualElement>
     </ui:VisualElement>
