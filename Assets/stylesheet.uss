@@ -1,6 +1,37 @@
-:root {
+:root{
+    --background-height: 50px;
+    --progress-height: 25px;
 }
 
 .unity-list-view__item:hover {
     background-color: rgba(0, 0, 0, 0);
+}
+
+.jam-progress-bar .unity-progress-bar__progress {
+    background-color: rgb(129 12 12);
+}
+
+.jam-progress-bar .unity-progress-bar__title {
+    color: var(--color-progressbar-text);
+    font-size: 30px;
+    top: 0;
+    -unity-text-align: middle-left;
+    padding: 0;
+}
+
+.jam-progress-bar .unity-progress-bar{
+    min-height: var(--background-height);
+    max-height: var(--background-height);
+}
+
+.jam-progress-bar .unity-progress-bar__background {
+    min-height: var(--background-height);
+    max-height: var(--background-height);
+    overflow: visible;
+}
+
+.jam-progress-bar .unity-progress-bar__progress {
+    height: var(--progress-height);
+    top: 8px;
+    left: 0;
 }

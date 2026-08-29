@@ -16,7 +16,28 @@ public class GameSetupUI : MonoBehaviour
     private void Start()
     {
         if (!NetworkManager.Singleton.SpawnManager.GetLocalPlayerObject()
-                .TryGetComponent(out MpPlayerController player)) return;
+                .TryGetComponent(out MpPlayerController player))
+        {
+            print("Found nothing");
+            return;
+        }
+        
+        player.onPlayerRoleChanged.AddListener(role =>
+        {
+            switch (role)
+            {
+                case EPlayerRole.Dev:
+                    roleText.text = DevRoleText;
+                    descriptionText.text = DevDescText;
+                    break;
+                case EPlayerRole.BadGuy:
+                    roleText.text = BadRoleText;
+                    descriptionText.text = BadDescText;
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
+        });
         
         switch (player.GetRole())
         {

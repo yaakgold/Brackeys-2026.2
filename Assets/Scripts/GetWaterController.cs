@@ -5,11 +5,19 @@ using UnityEngine.UIElements;
 public class GetWaterController : Minigame
 {
     [SerializeField] private PanelRenderer panelRenderer;
-    [SerializeField] private float updateSpeed;
-    [SerializeField] private float width, height;
+    [SerializeField] private float waterUpdateSpeed;
+    [SerializeField] private float cupChangeSpeed;
+    [SerializeField] private Texture[] waterTextures;
+    [SerializeField] private Texture[] cupTextures;
 
     private VisualElement _root;
-    private IEnumerator _countUpCoroutine;
+    private IEnumerator _waterChangeCoroutine;
+    private IEnumerator _cupChangeCoroutine;
+    private Image _waterImage;
+    private Image _cupImage;
+    
+    private int _currentWaterIndex;
+    private int _currentCupIndex;
     
     void OnEnable()
     {
@@ -27,38 +35,54 @@ public class GetWaterController : Minigame
         
         _root.Q<Button>("btnFill").RegisterCallback<PointerDownEvent>(OnFillDown, TrickleDown.TrickleDown);
         _root.Q<Button>("btnFill").RegisterCallback<PointerUpEvent>(OnFillUp, TrickleDown.TrickleDown);
-        
-        var pgbCup = _root.Q<ProgressBar>("pgbCup"); 
-        pgbCup.style.width = width;
-        pgbCup.style.height = height;
-    }
 
-    private void SetSliderValue()
-    {
-        var pgbCup = _root.Q<ProgressBar>("pgbCup");
-        pgbCup.value++;
+        _waterImage = _root.Q<Image>("imgWater");
+        _cupImage = _root.Q<Image>("imgCup");
     }
-
     private void OnFillDown(PointerDownEvent evt)
     {
-        _countUpCoroutine = CountUp();
-        StartCoroutine(_countUpCoroutine);
+        _waterChangeCoroutine = WaterChangeCo();
+        StartCoroutine(_waterChangeCoroutine);
+        
+        _cupChangeCoroutine = CupChangeCo();
+        StartCoroutine(_cupChangeCoroutine);
     }
     
     private void OnFillUp(PointerUpEvent evt)
     {
-        StopCoroutine(_countUpCoroutine);
-        
-        onCompleteMinigame.Invoke(Mathf.CeilToInt(20 * (_root.Q<ProgressBar>("pgbCup").value / 100)));
+        StopMinigame();
     }
 
-    private IEnumerator CountUp()
+    public override void StopMinigame()
+    {
+        base.StopMinigame();
+        
+        StopCoroutine(_waterChangeCoroutine);
+        StopCoroutine(_cupChangeCoroutine);
+        
+        onCompleteMinigame.Invoke(1 + _currentCupIndex);
+    }
+
+    private IEnumerator WaterChangeCo()
     {
         while (true)
         {
-            yield return new WaitForSeconds(updateSpeed);
-
-            SetSliderValue();
+            _waterImage.image = waterTextures[_currentWaterIndex];
+            _currentWaterIndex = (_currentWaterIndex + 1) % waterTextures.Length;
+            yield return new WaitForSeconds(waterUpdateSpeed);
+        }
+    }
+    
+    private IEnumerator CupChangeCo()
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(cupChangeSpeed);
+            _cupImage.image = cupTextures[_currentCupIndex];
+            _currentCupIndex++;
+            
+            if (_currentCupIndex >= cupTextures.Length)
+                StopMinigame();
         }
     }
 }

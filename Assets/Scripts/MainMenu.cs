@@ -1,11 +1,8 @@
-using System;
 using System.Collections.Generic;
 using Blocks.Sessions.Common;
 using Text;
 using Unity.Netcode;
-using Unity.Properties;
 using Unity.Services.Authentication;
-using Unity.Services.Lobbies;
 using Unity.Services.Multiplayer;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -47,8 +44,11 @@ public class MainMenu : MonoBehaviour
         _session = obj;
 
         var playerName = _root.Q<TextField>("playerName")?.value;
-        if (!playerName.IsNullOrEmpty())
+        if (playerName != null && !playerName.IsNullOrEmpty())
+        {
+            playerName = playerName.Replace(' ', '_');
             AuthenticationService.Instance.UpdatePlayerNameAsync(playerName);
+        }
 
         ChatManager.Instance.EnableChat();
         
@@ -107,7 +107,11 @@ public class MainMenu : MonoBehaviour
         
         _root.Q<Button>("btnStart").RegisterCallback<ClickEvent>(StartGame);
         
-        _root.Q("quickJoin").RegisterCallback<ClickEvent>(OnDisplayChange);
+        _root.Q("QuickJoinButton").RegisterCallback<ClickEvent>(OnDisplayChange);
+
+        var playerName = AuthenticationService.Instance.PlayerName.Split('#')[0];
+        _root.Q<TextField>("playerName").value = playerName == "" ?  "" : playerName;
+
     }
 
     private void OnDisplayChange(ClickEvent evt)

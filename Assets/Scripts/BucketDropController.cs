@@ -13,6 +13,7 @@ public class BucketDropController : Minigame
     [SerializeField] private float timeBetweenDrops;
     [SerializeField] private DropController dropPrefab;
     [SerializeField] private TMP_Text timerText;
+    [SerializeField] private Sprite dropSprite;
 
     private bool _isRunning;
     private readonly List<DropController> _drops = new();
@@ -95,6 +96,7 @@ public class BucketDropController : Minigame
 
             var d = Instantiate(dropPrefab, randomSpawn.position, Quaternion.identity, transform);
             d.SetController(this);
+            d.SetSprite(dropSprite);
             _drops.Add(d);
             yield return new WaitForSeconds(timeBetweenDrops);
         }

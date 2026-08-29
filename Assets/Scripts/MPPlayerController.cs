@@ -2,6 +2,7 @@ using System;
 using Unity.Netcode;
 using Unity.Services.Authentication;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class MpPlayerController : NetworkBehaviour
 {
@@ -10,6 +11,8 @@ public class MpPlayerController : NetworkBehaviour
     [SerializeField] private EPlayerRole playerRole;
 
     private int _sanity = 100;
+    
+    public UnityEvent<EPlayerRole> onPlayerRoleChanged;
     
     private void Start()
     {
@@ -22,7 +25,16 @@ public class MpPlayerController : NetworkBehaviour
 
         if (!IsOwner) return;
         
-        SetNameRpc(AuthenticationService.Instance.PlayerName.Split("#")[0]);
+        SetNameRpc(AuthenticationService.Instance.PlayerName);
+        
+        AuthenticationService.Instance.PlayerNameChanged += SetNameRpc;
+    }
+
+    public override void OnNetworkDespawn()
+    {
+        base.OnNetworkDespawn();
+        
+        AuthenticationService.Instance.PlayerNameChanged -= SetNameRpc;
     }
 
     public void UpdateSanity(int amt)
@@ -34,8 +46,8 @@ public class MpPlayerController : NetworkBehaviour
     [Rpc(SendTo.Server)]
     private void SetNameRpc(string pName)
     {
-        playerName = pName;
-        SetNameLocalRpc(pName);
+        playerName = pName.Split("#")[0];
+        SetNameLocalRpc(playerName);
     }
 
     [Rpc(SendTo.ClientsAndHost)]
@@ -45,9 +57,9 @@ public class MpPlayerController : NetworkBehaviour
         playerName = pName;
     }
 
-    public Color GetName()
+    public string GetName()
     {
-        return playerColor;
+        return playerName;
     }
     
     [Rpc(SendTo.Server)]
@@ -73,12 +85,15 @@ public class MpPlayerController : NetworkBehaviour
     {
         playerRole = role;
         SetRoleLocalRpc(role);
+        onPlayerRoleChanged?.Invoke(playerRole);
     }
 
     [Rpc(SendTo.ClientsAndHost)]
     private void SetRoleLocalRpc(EPlayerRole role)
     {
         playerRole = role;
+        
+        onPlayerRoleChanged?.Invoke(playerRole);
     }
 
     public EPlayerRole GetRole()

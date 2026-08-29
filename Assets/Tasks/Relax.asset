@@ -18,4 +18,5 @@ MonoBehaviour:
   taskType: 0
   effectAmount: 2
   timeToComplete: 2
-  minigamePrefab: {fileID: 4520182378098800969, guid: 2bcce1dfdb80dcb56a03eed38dbdc244, type: 3}
+  minigamePrefab: {fileID: 4520182378098800969, guid: 205a813d98ae2b06fba73476ff2cdf6c, type: 3}
+  checkIfRouterBrokenToday: 0

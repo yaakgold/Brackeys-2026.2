@@ -1,9 +1,9 @@
 using System.Collections.Generic;
 using TMPro;
 using Unity.Netcode;
+using Unity.Services.Authentication;
 using UnityEngine;
 
-[RequireComponent(typeof(CircleCollider2D))]
 public class Interactable : NetworkBehaviour
 {
     [SerializeField] private float interactionRange;
@@ -12,11 +12,7 @@ public class Interactable : NetworkBehaviour
     [SerializeField] private PanelController uiPanel;
     [SerializeField] private string interactionName;
     [SerializeField] private List<GameTask> tasks;
-
-    private void OnValidate()
-    {
-        GetComponent<CircleCollider2D>().radius = interactionRange;
-    }
+    [SerializeField] private string playerName;
 
     private void OnTriggerEnter2D(Collider2D other)
     {
@@ -24,7 +20,7 @@ public class Interactable : NetworkBehaviour
         if (!player.IsOwner) return;
             
         canvas.gameObject.SetActive(true);
-        interactionText.text = $"{interactionName}\nPress 'E' to interact";
+        interactionText.text = $"{playerName}'s {interactionName}\nPress 'E' to interact";
         InteractionManager.Instance.SetCurrentInteractable(this);
     }
 
@@ -37,13 +33,27 @@ public class Interactable : NetworkBehaviour
         InteractionManager.Instance.UnSetCurrentInteractable();
     }
 
-    public virtual void Interact()
+    public void Interact()
     {
         uiPanel.OpenPanel(this, tasks);
     }
-
-    private void OnDrawGizmosSelected()
+    
+    [Rpc(SendTo.Server)]
+    public void SetNameRpc(string pName)
     {
-        Gizmos.DrawSphere(transform.position, interactionRange);
+        playerName = pName.Split("#")[0];
+        SetNameLocalRpc(playerName);
+    }
+
+    [Rpc(SendTo.ClientsAndHost)]
+    private void SetNameLocalRpc(string pName)
+    {
+        name = pName;
+        playerName = pName;
+    }
+
+    public string GetName()
+    {
+        return playerName;
     }
 }

@@ -1,8 +1,8 @@
 :root{
     --color-progressbar-background: rgba(16, 16, 16, 0.75);
     --color-progressbar-border-color: rgba(0, 0, 0, 0);
-    --color-progressbar-fill: rgba(145, 213, 97, 0.75);
-    --color-progressbar-text: rgb(255, 255, 255);
+    --color-progressbar-fill: rgb(95 135 64);
+    --color-progressbar-text: rgb(255 255 255);
     --color-progressbar-text-low: rgb(255, 0, 0);
     --color-progressbar-ammo-blue: rgba(19, 181, 231, 0.75);
 }
@@ -12,8 +12,8 @@
     width: 100%;
     background-color: black;
     border-radius: 10px;
-    min-height: 16px;
-    max-height: 16px;
+    min-height: 25px;
+    max-height: 25px;
     overflow: hidden;
     justify-content: center;
 }
@@ -25,8 +25,8 @@
 .blocks-progress-bar .unity-progress-bar__background {
     position: absolute;
     width: 100%;
-    min-height: 16px;
-    max-height: 16px;
+    min-height: 25px;
+    max-height: 25px;
     background-color: var(--color-progressbar-background);
     border-radius: 10px;
     overflow: hidden;
@@ -36,7 +36,7 @@
 
 .blocks-progress-bar .unity-progress-bar__progress {
     position: absolute;
-    height: 8px;
+    height: 12px;
     margin: 0px;
     border-radius: 5px;
     padding: 0px;
@@ -47,7 +47,9 @@
 }
 
 .blocks-progress-bar .unity-progress-bar__title {
-    display: none;
+    color: var(--color-progressbar-text);
+    font-size: 10;
+    top: -4;
 }
 
 .blocks-ammo-bar .unity-progress-bar__progress {

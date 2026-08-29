@@ -1,0 +1,11 @@
+<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/Scripts/Blocks/Common/Content/stylesheets/modals.uss?fileID=7433441132597879392&amp;guid=cef182fc9fb448339fe32a55e8ba31b6&amp;type=3#modals"/>
+    <Style src="project://database/Assets/Scripts/Blocks/Common/Content/stylesheets/labels.uss?fileID=7433441132597879392&amp;guid=3967daf31cdfb2d4b8326839de2c378e&amp;type=3#labels"/>
+    <Style src="project://database/Assets/Scripts/Blocks/Common/Content/stylesheets/progressbar.uss?fileID=7433441132597879392&amp;guid=560ab0d72fae04873ba6435f044289eb&amp;type=3#progressbar"/>
+    <Style src="project://database/Assets/stylesheet.uss?fileID=7433441132597879392&amp;guid=fe23e4d62800b17478c2330b29072283&amp;type=3#stylesheet"/>
+    <ui:VisualElement name="pnlDisplay" class="blocks-modal" style="flex-grow: 1; position: absolute; top: 20px; left: 20px; padding-left: 5px; padding-right: 5px; padding-top: 10px; padding-bottom: 10px;">
+        <ui:Label text="Day: 0" name="lblDay" class="blocks-label" style="font-size: 30px;"/>
+        <ui:Label text="Hour: 0" name="lblHour" class="blocks-label" style="font-size: 30px;"/>
+        <ui:ProgressBar value="100" title="Sanity" name="pgbSanity" class="blocks-progress-bar jam-progress-bar" style="width: 150px; margin-left: 20px; margin-top: 20px; margin-right: 20px; margin-bottom: 20px; -unity-font-style: normal;"/>
+    </ui:VisualElement>
+</ui:UXML>

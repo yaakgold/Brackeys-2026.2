@@ -49,10 +49,19 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   requiresRenderer: 0
+  minigameMaterial: {fileID: 0}
   panelRenderer: {fileID: 683679542022469096}
-  updateSpeed: 0.075
-  width: 100
-  height: 300
+  waterUpdateSpeed: 0.1
+  cupChangeSpeed: 0.75
+  waterTextures:
+  - {fileID: 2800000, guid: c5f5571cb057fa8a6aea2572e1ea72a3, type: 3}
+  - {fileID: 2800000, guid: 9b993c157a9b7128d9614803d4914d73, type: 3}
+  - {fileID: 2800000, guid: f50479a7b24127546a6d65550f3bfd2c, type: 3}
+  cupTextures:
+  - {fileID: 2800000, guid: 4dbcbec8620d717b1a64c8f3dada8146, type: 3}
+  - {fileID: 2800000, guid: 19f7f76b89f10efbb8bf002e32754d34, type: 3}
+  - {fileID: 2800000, guid: f3b2a1e0bb9e9b1b4a4848458dca805b, type: 3}
+  - {fileID: 2800000, guid: 59a249a6d42ee141e81ebc4636fe5549, type: 3}
 --- !u!1931382934 &683679542022469096
 PanelRenderer:
   m_ObjectHideFlags: 0

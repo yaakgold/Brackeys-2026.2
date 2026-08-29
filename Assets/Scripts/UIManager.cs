@@ -1,7 +1,9 @@
+using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
+using UnityEngine.UIElements;
 
 public class UIManager : MonoBehaviour
 {
@@ -23,15 +25,31 @@ public class UIManager : MonoBehaviour
     }
 
     #endregion
-
-    [SerializeField] private TMP_Text dayText;
-    [SerializeField] private TMP_Text hourText;
-    [SerializeField] private Slider sanitySlider;
+    
     [SerializeField] private EodPanelController eodPanelController;
     [SerializeField] private EndOfJamPanel eojPanelController;
+    [SerializeField] private PanelRenderer inGameUIPanel;
 
     private PlayerMovement _player;
-    
+    private VisualElement _root;
+    private Label _dayLabel;
+    private Label _hourLabel;
+    private ProgressBar _sanityProgressBar;
+
+    private void OnEnable()
+    {
+        inGameUIPanel.RegisterUIReloadCallback(OnUIReload);
+    }
+
+    private void OnUIReload(PanelRenderer panelRenderer, VisualElement rootElement)
+    {
+        _root = rootElement;
+        
+        _dayLabel = _root.Q<Label>("lblDay");
+        _hourLabel = _root.Q<Label>("lblHour");
+        _sanityProgressBar = _root.Q<ProgressBar>("pgbSanity");
+    }
+
     public void OpenEndOfDayUI()
     {
         //TODO: Handle what to do if other players are in menus. I think I am going to force them out, like Among Us
@@ -53,12 +71,13 @@ public class UIManager : MonoBehaviour
 
     public void SetDayText(int day)
     {
-        dayText.text = $"Day: {day}";
+        
+        _dayLabel.text = $"Day: {day}";
     }
 
     public void SetHourText(int hour)
     {
-        hourText.text = $"Hour: {hour}";
+        _hourLabel.text = $"Hour: {hour}";
     }
 
     /// <summary>
@@ -67,12 +86,7 @@ public class UIManager : MonoBehaviour
     /// <param name="sanity">New value / 100</param>
     public void SetSanity(int sanity)
     {
-        sanitySlider.value = sanity;
-    }
-
-    public void OnNextDayButton()
-    {
-        ProjectManager.Instance.StartNextDayRpc();
+        _sanityProgressBar.value = sanity;
     }
 
     public void SetPlayer(PlayerMovement playerMovement)

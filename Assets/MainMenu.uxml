@@ -7,22 +7,22 @@
     <Style src="project://database/Assets/Scripts/Blocks/Common/Content/stylesheets/labels.uss?fileID=7433441132597879392&amp;guid=3967daf31cdfb2d4b8326839de2c378e&amp;type=3#labels"/>
     <Style src="project://database/Assets/Scripts/Blocks/Common/Content/stylesheets/utilities.uss?fileID=7433441132597879392&amp;guid=c4c8f1a4b06149cba4827009b662075d&amp;type=3#utilities"/>
     <Style src="project://database/Assets/Scripts/Blocks/Common/Content/stylesheets/inputs.uss?fileID=7433441132597879392&amp;guid=e01aade3b4d44466be1a74cda2e4b773&amp;type=3#inputs"/>
-    <ui:VisualElement data-source="project://database/Assets/Scripts/Blocks/MultiplayerSession/Settings/SessionSettings.asset?fileID=11400000&amp;guid=0bf4e1684added44da254017c7fc41b2&amp;type=2#SessionSettings" style="flex-grow: 1; align-items: center; align-self: center; justify-content: center; align-content: center; flex-direction: column; flex-wrap: nowrap; max-width: 100%;">
+    <ui:VisualElement data-source="project://database/Assets/Settings/SessionSettings.asset?fileID=11400000&amp;guid=0bf4e1684added44da254017c7fc41b2&amp;type=2#SessionSettings" style="flex-grow: 1; align-items: center; align-self: center; justify-content: center; align-content: center; flex-direction: column; flex-wrap: nowrap; max-width: 100%;">
         <ui:VisualElement style="flex-grow: 1; height: auto; min-height: 0; max-height: 50%;">
             <ui:VisualElement class="blocks-modal blocks-container--horizontal" style="flex-grow: 1; bottom: -200px; position: absolute;">
                 <ui:Button text="Exit" name="btnExit" class="blocks-button"/>
-                <ui:Button text="Start Game" name="btnStart" enabled="false" data-source="project://database/Assets/Scripts/Blocks/MultiplayerSession/Settings/SessionSettings.asset?fileID=11400000&amp;guid=0bf4e1684added44da254017c7fc41b2&amp;type=2#SessionSettings" class="blocks-button" style="display: none;"/>
+                <ui:Button text="Start Game" name="btnStart" enabled="false" data-source="project://database/Assets/Settings/SessionSettings.asset?fileID=11400000&amp;guid=0bf4e1684added44da254017c7fc41b2&amp;type=2#SessionSettings" class="blocks-button" style="display: none;"/>
             </ui:VisualElement>
             <ui:VisualElement name="mainMenu" class="blocks-menu blocks-modal" style="flex-grow: 1; visibility: visible; overflow: visible; opacity: 1; height: auto; display: flex;">
                 <ui:Label text="Name of the game!" class="blocks-header blocks-header--space-bottom"/>
-                <ui:TextField label="Name:" placeholder-text="Enter your name..." name="playerName" class="blocks-textfield"/>
+                <ui:TextField label="Name:" placeholder-text="Enter your name..." name="playerName" max-length="50" class="blocks-textfield"/>
                 <ui:Button text="Find a Lobby" name="btnJoin" class="blocks-button"/>
             </ui:VisualElement>
             <ui:VisualElement name="join" style="flex-grow: 1; flex-direction: row; justify-content: center; align-self: auto; align-content: auto; align-items: center; display: none;">
-                <ui:Instance template="JoinSessionByQuickJoin" data-source="project://database/Assets/Scripts/Blocks/MultiplayerSession/Settings/SessionSettings.asset?fileID=11400000&amp;guid=0bf4e1684added44da254017c7fc41b2&amp;type=2#SessionSettings" name="quickJoin" data-source-path="" style="align-items: center; align-content: center; margin-top: 10px; margin-right: 10px; margin-bottom: 10px; margin-left: 10px;"/>
-                <ui:Instance template="JoinSessionByCode" name="byCode" data-source="project://database/Assets/Scripts/Blocks/MultiplayerSession/Settings/SessionSettings.asset?fileID=11400000&amp;guid=0bf4e1684added44da254017c7fc41b2&amp;type=2#SessionSettings" style="margin-top: 10px; margin-right: 10px; margin-bottom: 10px; margin-left: 10px;"/>
+                <ui:Instance template="JoinSessionByQuickJoin" data-source="project://database/Assets/Settings/SessionSettings.asset?fileID=11400000&amp;guid=0bf4e1684added44da254017c7fc41b2&amp;type=2#SessionSettings" name="quickJoin" data-source-path="" style="align-items: center; align-content: center; margin-top: 10px; margin-right: 10px; margin-bottom: 10px; margin-left: 10px;"/>
+                <ui:Instance template="JoinSessionByCode" name="byCode" data-source="project://database/Assets/Settings/SessionSettings.asset?fileID=11400000&amp;guid=0bf4e1684added44da254017c7fc41b2&amp;type=2#SessionSettings" style="margin-top: 10px; margin-right: 10px; margin-bottom: 10px; margin-left: 10px;"/>
             </ui:VisualElement>
-            <ui:Instance template="CurrentSession" name="currentSession" data-source="project://database/Assets/Scripts/Blocks/MultiplayerSession/Settings/SessionSettings.asset?fileID=11400000&amp;guid=0bf4e1684added44da254017c7fc41b2&amp;type=2#SessionSettings" style="display: none; min-width: 85%;"/>
+            <ui:Instance template="CurrentSession" name="currentSession" data-source="project://database/Assets/Settings/SessionSettings.asset?fileID=11400000&amp;guid=0bf4e1684added44da254017c7fc41b2&amp;type=2#SessionSettings" style="display: none; min-width: 85%;"/>
         </ui:VisualElement>
     </ui:VisualElement>
 </ui:UXML>

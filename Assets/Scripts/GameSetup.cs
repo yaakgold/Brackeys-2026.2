@@ -33,11 +33,15 @@ public class GameSetup : NetworkBehaviour
         {
             Destroy(gameObject);
         }
+    }
+
+    protected override void OnNetworkPostSpawn()
+    {
+        base.OnNetworkPostSpawn();
         
         if (!NetworkManager.Singleton.IsHost && !NetworkManager.Singleton.IsServer) return;
         
         var randomId = GetRandomId(NetworkManager.Singleton.ConnectedClientsIds);
-
         foreach (var id in NetworkManager.Singleton.ConnectedClientsIds)
         {
             var objs = NetworkManager.Singleton.SpawnManager.GetClientOwnedObjects(id);
@@ -60,7 +64,6 @@ public class GameSetup : NetworkBehaviour
         }
 
         StartCoroutine(WaitForPlayerToReadInstructions());
-
     }
 
     private IEnumerator WaitForPlayerToReadInstructions()

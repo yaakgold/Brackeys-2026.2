@@ -5,6 +5,7 @@ using Random = UnityEngine.Random;
 public class DropController : MonoBehaviour
 {
     [SerializeField] private float minSpeed, maxSpeed;
+    [SerializeField] private SpriteRenderer gfx;
 
     private float _fallSpeed;
     private BucketDropController _controller;
@@ -14,6 +15,11 @@ public class DropController : MonoBehaviour
     private void Start()
     {
         _fallSpeed = Random.Range(minSpeed, maxSpeed);
+    }
+
+    private void Update()
+    {
+        gfx.transform.Rotate(Vector3.forward, Random.Range(minSpeed, maxSpeed) * .15f);
     }
 
     private void OnCollisionEnter2D(Collision2D other)
@@ -27,6 +33,11 @@ public class DropController : MonoBehaviour
             _controller.RemoveDrop(this);
             Destroy(gameObject);
         }
+    }
+
+    public void SetSprite(Sprite spr)
+    {
+        gfx.sprite = spr;
     }
 
     public void Move()
