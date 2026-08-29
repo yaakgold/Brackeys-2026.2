@@ -85,7 +85,7 @@ public class GetWaterController : Minigame
             _currentCupIndex++;
             
             if (_currentCupIndex >= cupTextures.Length)
-                StopMinigame();
+                StopCoroutine(_cupChangeCoroutine);
         }
     }
 }

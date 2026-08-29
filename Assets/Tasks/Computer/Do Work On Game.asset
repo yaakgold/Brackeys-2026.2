@@ -10,14 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 52507f97181d4ca69b3ec17ddc747f8f, type: 3}
-  m_Name: Do Easy Task
+  m_Name: Do Work On Game
   m_EditorClassIdentifier: Assembly-CSharp::GameTask
-  title: Do Easy Task
+  title: Do Work On Game
   description: This is an easy task to complete
   difficulty: 0
   taskType: 1
   effectAmount: 1
-  timeToComplete: 24
+  timeToComplete: 4
   minigamePrefab: {fileID: 5126527965705412149, guid: 5e16297e214fb9bd38765f37c7ba3a4d, type: 3}
   checkIfRouterBrokenToday: 0
   checkIfRouterIsCurrentlyBroken: 1

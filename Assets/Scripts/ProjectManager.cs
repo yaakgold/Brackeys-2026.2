@@ -169,6 +169,7 @@ public class ProjectManager : NetworkBehaviour
     [Rpc(SendTo.ClientsAndHost)]
     private void EndOfDayRpc()
     {
+        MinigameController.Instance.CloseMinigame(0);
         if (dayNumber == jamLength)
         {
             UIManager.Instance.OpenEndOfJamUI();

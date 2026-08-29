@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Linq;
 using Unity.Netcode;
 using UnityEngine;
@@ -93,11 +94,17 @@ public class MinigameController : MonoBehaviour
         CloseMinigame();
     }
 
-    public void CloseMinigame()
+    public void CloseMinigame(int time = 1)
     {
         if (!_minigame.TryGetComponent(out Minigame mc)) return;
         mc.onCompleteMinigame.RemoveAllListeners();
         
+        StartCoroutine(WaitASecondToClose(time));
+    }
+
+    private IEnumerator WaitASecondToClose(float seconds)
+    {
+        yield return new WaitForSeconds(seconds);
         Destroy(_minigame);
         renderMinigame.SetActive(false);
         panelController.ClosePanel();
