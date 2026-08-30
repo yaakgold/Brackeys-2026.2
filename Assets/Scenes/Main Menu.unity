@@ -234,8 +234,8 @@ Camera:
   m_GameObject: {fileID: 616941522}
   m_Enabled: 1
   serializedVersion: 2
-  m_ClearFlags: 1
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_ClearFlags: 2
+  m_BackGroundColor: {r: 0.28627452, g: 0.28627452, b: 0.28627452, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -682,6 +682,11 @@ MonoBehaviour:
   gameSetupPrefab: {fileID: 8921908125584941535, guid: a5aca31b3ac33ac5994faa78acdb2d0b, type: 3}
   panelRenderer: {fileID: 854523985}
   sessionSettings: {fileID: 11400000, guid: 0bf4e1684added44da254017c7fc41b2, type: 2}
+  instructions:
+  - {fileID: 2800000, guid: eea0be1ba3ee93a0bb89373f67730c57, type: 3}
+  - {fileID: 2800000, guid: a5ff59c9cca9819549167c63dfb98c24, type: 3}
+  - {fileID: 2800000, guid: 1d3d49175d9e7cce89cf301e6f48217e, type: 3}
+  minPlayers: 1
 --- !u!1001 &1040031268
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -752,6 +757,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8214134490659830777, guid: 4f60822af0c06433c9c52cd9de5ecb11, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8627652695361806762, guid: 4f60822af0c06433c9c52cd9de5ecb11, type: 3}
+      propertyPath: UseCustomEnvironment
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -833,6 +842,15 @@ MonoBehaviour:
     pitch: 1
     pitchVariance: 0.1
     loop: 0
+    mixerGroup: {fileID: 0}
+    source: {fileID: 0}
+  - name: Microwave
+    clip: {fileID: 8300000, guid: 3386ec533a3128301b71d9d67552ffbc, type: 3}
+    volume: 0.5
+    volumeVariance: 0.1
+    pitch: 1
+    pitchVariance: 0.1
+    loop: 1
     mixerGroup: {fileID: 0}
     source: {fileID: 0}
 --- !u!4 &1269429566

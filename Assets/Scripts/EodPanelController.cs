@@ -19,6 +19,7 @@ public class PlayerEod
 public class EodPanelController : NetworkBehaviour
 {
     [SerializeField] private PanelRenderer panelRenderer;
+    [SerializeField] private Camera kickedCamera;
 
     private VisualElement _root;
     private MultiColumnListView _multiColumnListView;
@@ -29,14 +30,7 @@ public class EodPanelController : NetworkBehaviour
     public bool canVote = true;
 
     private Dictionary<ulong, int> _playerVotes;
-
-    private void Start()
-    {
-        if (NetworkManager.Singleton.IsServer || NetworkManager.Singleton.IsHost)
-        {
-            //NetworkObject.Spawn();
-        }
-    }
+    private readonly NetworkList<ulong> _kickedPlayers = new();
 
     void OnEnable()
     {
@@ -47,7 +41,7 @@ public class EodPanelController : NetworkBehaviour
     {
         panelRenderer.UnregisterUIReloadCallback(OnUIReload);
     }
-    
+
     void OnUIReload(PanelRenderer renderer, VisualElement rootElement)
     {
         _root = rootElement;
@@ -171,7 +165,7 @@ public class EodPanelController : NetworkBehaviour
         }
         
         //Close panel
-        if (votes == _players.Count)
+        if (votes == _players.Count - _kickedPlayers.Count)
         {
             var player = _playerVotes.FirstOrDefault(pair => pair.Value >= Mathf.CeilToInt(_players.Count * .5f) 
                                                              && pair.Key != 9999);
@@ -179,9 +173,17 @@ public class EodPanelController : NetworkBehaviour
             //This means there was a majority on someone
             if (player is not { Key: 0, Value: 0 })
             {
-                //TODO: Handle a player being kicked off the team
+                var objs = NetworkManager.Singleton.SpawnManager.GetClientOwnedObjects(player.Key);
+                foreach (var obj in objs)
+                {
+                    if (obj.TryGetComponent(out PlayerMovement pm))
+                    {
+                        pm.NetworkObject.Despawn();
+                    }
+                }
+                _kickedPlayers.Add(player.Key);
             }
-            canVote = true;
+
             PlayerVotedClientRpc();
             UIManager.Instance.CloseEndOfDayUI();
         } 
@@ -191,7 +193,7 @@ public class EodPanelController : NetworkBehaviour
     [Rpc(SendTo.ClientsAndHost)]
     private void PlayerVotedClientRpc()
     {
-        canVote = true;
+        canVote = !_kickedPlayers.Contains(OwnerClientId);
         UIManager.Instance.CloseEndOfDayUI();
     }
 }

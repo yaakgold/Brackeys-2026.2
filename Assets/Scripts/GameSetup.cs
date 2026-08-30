@@ -68,7 +68,7 @@ public class GameSetup : NetworkBehaviour
 
                 if (id == randomId)
                 {
-                    player.SetRoleRpc(EPlayerRole.BadGuy);
+                    player.SetRoleRpc(EPlayerRole.VideCoder);
                 }
                 
                 break;

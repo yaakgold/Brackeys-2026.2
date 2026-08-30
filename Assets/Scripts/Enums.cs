@@ -15,8 +15,8 @@ public enum ETaskType
 
 public enum EPlayerRole
 {
-    Dev,
-    BadGuy
+    Developer,
+    VideCoder
 }
 
 public enum EGameQualityType

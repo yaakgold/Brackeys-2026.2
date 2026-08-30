@@ -17,6 +17,6 @@ MonoBehaviour:
   sessionType: default-session
   usePlayerName: 1
   createNetworkSession: 1
-  networkType: 0
+  networkType: 1
   ipAddress: 127.0.0.1
   port: 7777

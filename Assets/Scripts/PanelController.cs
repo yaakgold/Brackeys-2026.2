@@ -74,7 +74,7 @@ public class PanelController : MonoBehaviour
             }
             else
             {
-                ((Button)element).text = "Do Task";
+                ((Button)element).text = DoTask;
             }
             ((Button)element).AddToClassList("blocks-button");
             ((Button)element).RegisterCallbackOnce<ClickEvent>(evt => OnDoTaskClicked(gameTask));

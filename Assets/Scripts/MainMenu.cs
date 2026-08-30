@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using Blocks.Sessions.Common;
 using Text;
+using TMPro;
 using Unity.Netcode;
 using Unity.Services.Authentication;
 using Unity.Services.Multiplayer;
@@ -17,14 +18,19 @@ public class MainMenu : MonoBehaviour
     [SerializeField] private NetworkObject gameSetupPrefab;
     [SerializeField] private PanelRenderer panelRenderer;
     [SerializeField] private SessionSettings sessionSettings;
+    [SerializeField] private Texture[] instructions;
+    [SerializeField] private int minPlayers;
     
     private VisualElement _root;
     private SessionObserver _sessionObserver;
     private ISession _session;
+    private int _currentIndex;
+    private int _currentConnectedPlayers;
 
     private void Awake()
     {
         Utilities.OnRestartApplication = new UnityEvent();
+        Utilities.OnMpPlayerSpawned = new UnityEvent<ulong>();
     }
 
     private void Start()
@@ -46,6 +52,13 @@ public class MainMenu : MonoBehaviour
     void OnEnable()
     {
         panelRenderer.RegisterUIReloadCallback(OnUIReload);
+        Utilities.OnMpPlayerSpawned.AddListener(OnPlayerSpawned);
+    }
+
+    private void OnPlayerSpawned(ulong clientId)
+    {
+        _currentConnectedPlayers++;
+        CheckIfCanStart();
     }
 
     void OnDisable()
@@ -56,7 +69,7 @@ public class MainMenu : MonoBehaviour
     private void SessionObserverOnSessionAdded(ISession obj)
     {
         _session = obj;
-        
+
         var playerName = _root.Q<TextField>("playerName")?.value;
         if (playerName != null && !playerName.IsNullOrEmpty())
         {
@@ -72,23 +85,21 @@ public class MainMenu : MonoBehaviour
         
         if (!_session.IsHost) return;
         _root.Q("btnStart").style.display = DisplayStyle.Flex;
-            
-        //TODO: Remove this after testing
-        _root.Q("btnStart").enabledSelf = true;
+        
+        CheckIfCanStart();
     }
 
     private void SessionOnPlayerLeaving(string obj)
     {
         if (SceneManager.GetActiveScene().name != "Main Menu") return;
+        _currentConnectedPlayers--;
         
-        if (_session.PlayerCount <= 2)
-        {
-            _root.Q("btnStart").enabledSelf = false;
-        }
+        CheckIfCanStart();
     }
 
     private void SessionOnRemovedFromSession()
     {
+        _currentConnectedPlayers = 0;
         if (SceneManager.GetActiveScene().name != "Main Menu")
         {
             SceneManager.LoadScene("Main Menu");
@@ -98,6 +109,8 @@ public class MainMenu : MonoBehaviour
         {
             _root.Q("join").style.display = DisplayStyle.Flex;
             _root.Q("currentSession").style.display = DisplayStyle.None;
+            _root.Q<Button>("btnBack").style.display = DisplayStyle.Flex;
+            _root.Q("btnStart").style.display = DisplayStyle.None;
             ChatManager.Instance.DisableChat();   
         }
     }
@@ -106,22 +119,26 @@ public class MainMenu : MonoBehaviour
     {
         _root.Q("join").style.display = DisplayStyle.None;
         _root.Q("currentSession").style.display = DisplayStyle.Flex;
+        _root.Q<Button>("btnBack").style.display = DisplayStyle.None;
     }
 
     private void SessionObserverOnAddingSessionFailed(AddingSessionOptions arg1, SessionException arg2)
     {
         _root.Q("join").style.display = DisplayStyle.Flex;
         _root.Q("currentSession").style.display = DisplayStyle.None;
+        _root.Q<Button>("btnBack").style.display = DisplayStyle.Flex;
     }
 
     private void SessionOnPlayerJoined(string obj)
     {
         if (SceneManager.GetActiveScene().name != "Main Menu") return;
-        
-        if (_session.PlayerCount >= 2)
-        {
-            _root.Q("btnStart").enabledSelf = true;
-        }
+
+        CheckIfCanStart();
+    }
+
+    private void CheckIfCanStart()
+    {
+        _root.Q("btnStart").enabledSelf = _currentConnectedPlayers >= minPlayers;
     }
 
     void OnUIReload(PanelRenderer renderer, VisualElement rootElement)
@@ -130,6 +147,7 @@ public class MainMenu : MonoBehaviour
         
         _root.Q<Button>("btnJoin").RegisterCallback<ClickEvent>(OnJoin);
         _root.Q<Button>("btnExit").RegisterCallback<ClickEvent>(OnExit);
+        _root.Q<Button>("btnBack").RegisterCallback<ClickEvent>(OnBack);
         
         _root.Q<Button>("btnStart").RegisterCallback<ClickEvent>(StartGame);
         
@@ -137,14 +155,41 @@ public class MainMenu : MonoBehaviour
 
         var playerName = AuthenticationService.Instance.PlayerName.Split('#')[0];
         _root.Q<TextField>("playerName").value = playerName == "" ?  "" : playerName;
+        
+        _root.Q<Button>("btnNext").RegisterCallback<ClickEvent>(OnInstructionNext);
+        _root.Q<Button>("btnInstructions").RegisterCallback<ClickEvent>(_ =>
+        {
+            _currentIndex = 0;
+            _root.Q<Image>("imgInstruction").image = instructions[_currentIndex];
+            _root.Q("pnlInstructions").style.display = DisplayStyle.Flex;
+        });
+    }
 
+    private void OnBack(ClickEvent evt)
+    {
+        _root.Q<Button>("btnBack").style.display = DisplayStyle.None;
+        _root.Q("mainMenu").style.display = DisplayStyle.Flex;
+        _root.Q("join").style.display = DisplayStyle.None;
+    }
+
+    private void OnInstructionNext(ClickEvent evt)
+    {
+        _currentIndex++;
+        if (_currentIndex >= instructions.Length)
+        {
+            _root.Q("pnlInstructions").style.display = DisplayStyle.None;
+            return;
+        }
+        
+        _root.Q<Image>("imgInstruction").image = instructions[_currentIndex];
     }
 
     private void OnDisplayChange(ClickEvent evt)
     {
-        var obj = _root.Q("quickJoin");
+        var obj = _root.Q("join");
         
         _root.Q("currentSession").style.display = obj.style.display== DisplayStyle.Flex ?  DisplayStyle.None : DisplayStyle.Flex;
+        _root.Q<Button>("btnBack").style.display = obj.style.display;
     }
 
     private void OnExit(ClickEvent evt)
@@ -156,6 +201,7 @@ public class MainMenu : MonoBehaviour
     {
         _root.Q("mainMenu").style.display = DisplayStyle.None;
         _root.Q("join").style.display = DisplayStyle.Flex;
+        _root.Q<Button>("btnBack").style.display = DisplayStyle.Flex;
     }
     
     void StartGame(ClickEvent evt)

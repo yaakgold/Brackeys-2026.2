@@ -16,7 +16,7 @@ public class MpPlayerController : NetworkBehaviour
     
     private void Start()
     {
-        playerRole = EPlayerRole.Dev;
+        playerRole = EPlayerRole.Developer;
     }
     
     private void OnEnable()
@@ -34,6 +34,7 @@ public class MpPlayerController : NetworkBehaviour
     {
         base.OnNetworkSpawn();
 
+        Utilities.OnMpPlayerSpawned.Invoke(OwnerClientId);
         if (!IsOwner) return;
         
         SetNameRpc(AuthenticationService.Instance.PlayerName);

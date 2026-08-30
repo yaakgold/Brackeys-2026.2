@@ -1,4 +1,6 @@
+using TMPro;
 using Unity.Netcode;
+using Unity.Netcode.Components;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -9,8 +11,11 @@ public class PlayerMovement : NetworkBehaviour
     [SerializeField] private float moveSpeed = 5f;
     [SerializeField] private GameObject gfx;
     [SerializeField] private Animator anim;
+    [SerializeField] private Rigidbody2D rb;
+    [SerializeField] private TMP_Text nameText;
     
     private Vector2 _moveInput;
+    private CameraHolder _ch;
 
     public override void OnNetworkSpawn()
     {
@@ -22,7 +27,8 @@ public class PlayerMovement : NetworkBehaviour
         
         if (Camera.main != null && Camera.main.TryGetComponent(out CameraHolder ch))
         {
-            ch.SetCamera(transform);
+            _ch = ch;
+            _ch.SetCamera(transform);
         }
         
         SetColorRpc(OwnerClientId);
@@ -32,11 +38,35 @@ public class PlayerMovement : NetworkBehaviour
         if (NetworkManager.Singleton.SpawnManager.GetLocalPlayerObject()
             .TryGetComponent(out MpPlayerController player))
         {
-            name = player.name;
+            SetNameRpc(player.name);
             GameManager.Instance.onTick.AddListener(() => player.UpdateSanity(-GameManager.Instance.sanityDecreaseAmount));
         }
         
         ProjectManager.Instance.UpdateQualityRpc(0, OwnerClientId);
+    }
+
+    [Rpc(SendTo.Server)]
+    private void SetNameRpc(string n)
+    {
+        SetNameClientRpc(n);
+    }
+
+    [Rpc(SendTo.ClientsAndHost)]
+    private void SetNameClientRpc(string n)
+    {
+        name = n;
+        nameText.text = name;
+    }
+
+    public override void OnNetworkDespawn()
+    {
+        base.OnNetworkDespawn();
+
+        if (!IsOwner) return;
+
+        _ch.SwitchToKickCamera();
+        UIManager.Instance.SetKicked();
+        UIManager.Instance.HideHud();
     }
 
     private Vector3 _lastPos;
@@ -60,7 +90,9 @@ public class PlayerMovement : NetworkBehaviour
         var moveSlowdown = sanity / 50.0f;
         moveSlowdown = Mathf.Clamp(moveSlowdown, 0.25f, 1.0f);
         
-        transform.Translate(move * (Time.deltaTime * moveSpeed * moveSlowdown));
+        rb.AddForce(move * (moveSpeed * moveSlowdown), ForceMode2D.Impulse);
+
+        rb.linearVelocity = Vector3.ClampMagnitude(rb.linearVelocity, 6);
     }
     
     //Get inputs from the PlayerInput script

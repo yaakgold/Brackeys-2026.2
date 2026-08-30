@@ -53,18 +53,26 @@ public class MicrowaveController : Minigame
     {
         _countUpCoroutine = CountUp();
         StartCoroutine(_countUpCoroutine);
+        AudioManager.Instance.Play("Microwave");
     }
-    
-    private void OnCookUp(PointerUpEvent evt)
+
+    public override void StopMinigame()
     {
+        base.StopMinigame();
+        
+        AudioManager.Instance.Stop("Microwave");
+
         StopCoroutine(_countUpCoroutine);
 
         var sanityToAdd = 20 - Mathf.Abs(_secondsToReach - _currentSeconds);
         sanityToAdd = Mathf.Clamp(sanityToAdd, -10, 20);
         
-        //TODO: Make it show how far you were off by before closing or something
-        
         onCompleteMinigame.Invoke(sanityToAdd);
+    }
+
+    private void OnCookUp(PointerUpEvent evt)
+    {
+        StopMinigame();
     }
 
     private IEnumerator CountUp()

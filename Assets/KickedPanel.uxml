@@ -1,0 +1,8 @@
+<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/Scripts/Blocks/Common/Content/stylesheets/labels.uss?fileID=7433441132597879392&amp;guid=3967daf31cdfb2d4b8326839de2c378e&amp;type=3#labels"/>
+    <Style src="project://database/Assets/Scripts/Blocks/Common/Content/stylesheets/buttons.uss?fileID=7433441132597879392&amp;guid=24a81c4df0f34b7f8c53416ae3f8d529&amp;type=3#buttons"/>
+    <ui:VisualElement style="flex-grow: 1;">
+        <ui:Label text="YOU HAVE BEEN KICKED OFF THE PROJECT" class="blocks-header blocks-header--space-bottom" style="font-size: 48px; color: rgb(214, 0, 0); background-color: rgba(0, 0, 0, 0.761); border-top-left-radius: 15px; border-bottom-left-radius: 15px; border-bottom-right-radius: 15px; border-top-right-radius: 15px;"/>
+        <ui:Button text="Leave Game" name="btnLeaveGameKicked" class="blocks-button" style="bottom: 0; right: 0; position: absolute; background-color: rgba(0, 0, 0, 0.761);"/>
+    </ui:VisualElement>
+</ui:UXML>

@@ -80,7 +80,19 @@ public class MinigameController : MonoBehaviour
                  {
                      id = PanelController.CurrentInteractable.OwnerClientId;
                  }
-                 ProjectManager.Instance.UpdateQualityRpc(value, id);
+
+                 var sanity = UIManager.Instance.GetSanity();
+
+                 var qualityDecrease = sanity switch
+                 {
+                     < 10 => 4,
+                     < 20 => 3,
+                     < 30 => 2,
+                     < 40 => 1,
+                     _ => 0
+                 };
+
+                 ProjectManager.Instance.UpdateQualityRpc(value - qualityDecrease, id);
                  break;
              case ETaskType.Sabotage:
                  break;
@@ -96,6 +108,7 @@ public class MinigameController : MonoBehaviour
 
     public void CloseMinigame(int time = 1)
     {
+        if (_minigame == null) return;
         if (!_minigame.TryGetComponent(out Minigame mc)) return;
         mc.onCompleteMinigame.RemoveAllListeners();
         

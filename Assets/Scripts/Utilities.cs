@@ -7,6 +7,7 @@ using UnityEngine.Events;
 public static class Utilities
 {
     public static UnityEvent OnRestartApplication;
+    public static UnityEvent<ulong> OnMpPlayerSpawned;
     
     public static void Quit()
     {

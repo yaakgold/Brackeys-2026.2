@@ -29,11 +29,13 @@ public class UIManager : MonoBehaviour
 
     private PlayerMovement _player;
     private VisualElement _root;
+    private VisualElement _hudDisplay;
     private Label _dayLabel;
     private Label _hourLabel;
     private ProgressBar _sanityProgressBar;
     private int _day;
     private int _hour;
+    private bool _isPlayerKicked;
 
     private void OnEnable()
     {
@@ -57,29 +59,38 @@ public class UIManager : MonoBehaviour
     {
         _root = rootElement;
         
+        _hudDisplay = _root.Q<VisualElement>("pnlDisplay");
+        
         _dayLabel = _root.Q<Label>("lblDay");
         _dayLabel.text = $"Day: {_day}";
         _hourLabel = _root.Q<Label>("lblHour");
         _hourLabel.text = $"Hour: {_hour}";
         _sanityProgressBar = _root.Q<ProgressBar>("pgbSanity");
     }
+
+    public void HideHud()
+    {
+        _hudDisplay.style.display = DisplayStyle.None;
+    }
     
     public void OpenEndOfDayUI()
     {
-        //TODO: Handle what to do if other players are in menus. I think I am going to force them out, like Among Us
-        _player.GetComponent<PlayerInput>().enabled = false;
         eodPanelController.OpenPanel();
+        if (_isPlayerKicked) return;
+        _player.GetComponent<PlayerInput>().enabled = false;
     }
 
     public void CloseEndOfDayUI()
     {
         eodPanelController.ClosePanel();
+        if (_isPlayerKicked) return;
         _player.GetComponent<PlayerInput>().enabled = true;
     }
 
     public void OpenEndOfJamUI()
     {
         eojPanelController.OpenPanel();
+        if (_isPlayerKicked) return;
         _player.GetComponent<PlayerInput>().enabled = false;
     }
 
@@ -118,5 +129,10 @@ public class UIManager : MonoBehaviour
     public void SetPlayer(PlayerMovement playerMovement)
     {
         _player = playerMovement;
+    }
+
+    public void SetKicked()
+    {
+        _isPlayerKicked = true;
     }
 }
