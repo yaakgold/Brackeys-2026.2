@@ -686,7 +686,7 @@ MonoBehaviour:
   - {fileID: 2800000, guid: eea0be1ba3ee93a0bb89373f67730c57, type: 3}
   - {fileID: 2800000, guid: a5ff59c9cca9819549167c63dfb98c24, type: 3}
   - {fileID: 2800000, guid: 1d3d49175d9e7cce89cf301e6f48217e, type: 3}
-  minPlayers: 1
+  minPlayers: 4
 --- !u!1001 &1040031268
 PrefabInstance:
   m_ObjectHideFlags: 0
