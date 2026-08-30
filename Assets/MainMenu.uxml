@@ -10,7 +10,7 @@
     <ui:VisualElement data-source="project://database/Assets/Settings/SessionSettings.asset?fileID=11400000&amp;guid=0bf4e1684added44da254017c7fc41b2&amp;type=2#SessionSettings" style="flex-grow: 1; align-items: center; align-self: center; justify-content: flex-start; align-content: center; flex-direction: column; flex-wrap: nowrap; max-width: 100%; width: 100%;">
         <ui:VisualElement name="" style="flex-grow: 1; height: auto; min-height: 0; max-height: 100%; width: 75%;">
             <ui:VisualElement name="mainMenu" class="blocks-menu blocks-modal" style="flex-grow: 1; visibility: visible; overflow: visible; opacity: 1; height: 80%; display: flex; margin-bottom: 2%;">
-                <ui:Label text="The Problematic Vibe Coder" class="blocks-header blocks-header--space-bottom" style="-unity-text-auto-size: best-fit 10px 1000px;"/>
+                <ui:Label text="The Problematic Programmer" class="blocks-header blocks-header--space-bottom" style="-unity-text-auto-size: best-fit 10px 1000px;"/>
                 <ui:Button text="Show Instructions" name="btnInstructions" class="blocks-button"/>
                 <ui:TextField label="Name:" placeholder-text="Enter your name..." name="playerName" max-length="50" class="blocks-textfield" style="width: 50%; height: 25%; max-height: 25%; margin-top: 10%; margin-bottom: 5%;"/>
                 <ui:Button text="Find a Lobby" name="btnJoin" class="blocks-button"/>
